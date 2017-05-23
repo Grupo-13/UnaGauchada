@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Clean Blog</title>
+    <title>Una Gauchada</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php base_url()?>plantilla/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -30,3 +30,5 @@
     <![endif]-->
 
 </head>
+
+<body>

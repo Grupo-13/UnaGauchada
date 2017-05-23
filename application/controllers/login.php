@@ -1,36 +1,49 @@
 <?php
 
 /**
-* 
+*Falta: 
+**Error email y clave
+**
+**
+**
+**
 */
 class Login extends CI_Controller
 {
 	
-	function __construct()
-	{
-		parent::__construct();
-		
-		$this->load->model('mlogin');
-	}
-
 	public function index()
 	{
-		$data['msj']='';
-		$this->load->view('login', $data);
-	}
+		$email 		= $this->input->post('email');
+		$password 	= $this->input->post('clave');
 
-	public function ingresar()
-	{
-		$mail = $this->input->post('email');
-		$pass = $this->input->post('clave');
+		$this->load->model('usuario');
+		$fila = $this->usuario->getUsuario($email);
 
-		$res = $this->mlogin->ingresar($mail, $pass);
+		if ($fila != null) {
+			if ($fila->contraseña == $password) {
+				$data = array(
+					'email' => $email,
+					'id' => $fila->id_usuario,
+					'login' => true
+				);
 
-		if ($res == 1) {
-			$this->load->view('updpersona');
+				$this->session->set_userdata($data);
+				header("Location: " . base_url());
+			}else{
+				//clave incorrecta
+				header("Location: " . base_url());
+			}
 		}else{
-			$data['msj']="Usuario o clave erronea";
-			$this->load->view('login', $data);
+			//email incorrecto
+			header("Location: " . base_url());
 		}
 	}
+
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		header("Location: " . base_url());
+	}
+
+
 }
