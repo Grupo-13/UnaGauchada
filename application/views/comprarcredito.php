@@ -56,25 +56,18 @@
 					echo '
 					<br>';
 
+				
 
        	       	echo form_error('fecVencimiento');
-					//echo form_label('Email', 'email');
-					//echo form_input('email');
-					echo '
-					<div class="input-group">
-						<span class="input-group-addon" id="basic-addon1">Fecha de vencimiento</span>
-							';
-					$data = array(
-						'name' => 'fecVencimiento',
-						'class'        => 'form-control',
-						'placeholder'          => 'Ingrese fecha de vencimiento',
-						'aria-describedby'       => 'basic-addon1'
-						);
-					echo form_input($data);
-					echo '
-					</div>';
-					echo '
-					<br>';
+                echo '
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Fecha de vencimiento</span>
+                            ';
+                echo '<input type="date" name="fecVencimiento">';
+                    echo '
+                    </div>';
+                    echo '
+                    <br>';
 
 
        	       	echo form_error('creditos');
@@ -88,7 +81,8 @@
 						'name' => 'creditos',
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese la cantidad de créditos',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'maxlength'		=>'3'
 						);
 					echo form_input($data);
 					echo '
@@ -99,6 +93,7 @@
 		echo form_submit('botonSubmit', 'Comprar');
 		echo form_close();
 	?>
+	
 		</div>
 	</div><!-- /.col-lg-6 -->
 </div><!-- /.row -->

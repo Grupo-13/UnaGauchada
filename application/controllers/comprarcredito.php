@@ -36,9 +36,10 @@ class Comprarcredito extends CI_Controller
 			$this->mcompra->comprar($parametro);
     	}
 
-    	$this->load->view('guest/head');
-		$this->load->view('guest/nav');
-		$this->load->view("comprarcredito");
-    	$this->load->view('guest/footer');
-	}
+ 		 $this->load->view('guest/head');
+		 $this->load->view('guest/nav');
+		 $data= $this->input->post('creditos');
+		// $this->load->view('compra_realizada');
+  		 $this->load->view('guest/footer');
+	} 
 }
