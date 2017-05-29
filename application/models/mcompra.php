@@ -26,7 +26,10 @@ class Mcompra extends CI_Model
 		//$data2['monto']=$parametro['cantidad']*50;
 		// header("Location: " . base_url() . 'comprarcredito/compra_realizada'. $data2->creditos);
 	
+		$this->load->view('guest/head');
+		$this->load->view('guest/nav');
 		$this->load->view('compra_realizada', $campos);
+		$this->load->view('guest/footer');
 	}
 
 }

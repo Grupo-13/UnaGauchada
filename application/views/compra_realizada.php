@@ -4,7 +4,7 @@
 
                 	 <?php if ($this->session->userdata('login')) { ?>
                      
-                		<br><br><p>¡Su compra se ha realizado con éxito!</p>
+                		<br><br><p>¡Su compra ha sido exitosa!</p>
                         <p><?= 'Se ha registrado una compra de $', $monto, '.'?></p>
                         <p><?= 'Usted ahora posee ', $creditos, ' créditos.' ?></p>
                 	

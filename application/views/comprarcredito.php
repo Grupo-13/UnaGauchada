@@ -27,7 +27,8 @@
 						'name' => 'nrotarjeta',
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese su número de tarjeta',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'maxlength'		=>'16'
 						);
 					echo form_input($data);
 					echo '
@@ -48,7 +49,8 @@
 						'name' => 'codigo',
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese clave de seguridad',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'maxlength'		=>'4'
 						);
 					echo form_input($data);
 					echo '
