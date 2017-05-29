@@ -20,10 +20,10 @@ class Comprarcredito extends CI_Controller
 	
 	function comprar()
 	{	
-		$this->form_validation->set_rules('nrotarjeta', 'Número de tarjeta', 'required|exact_length[16]');
-    	$this->form_validation->set_rules('codigo', 'Código', 'required|exact_length[4]');
+		$this->form_validation->set_rules('nrotarjeta', 'Número de tarjeta', 'required|integer|exact_length[16]');
+    	$this->form_validation->set_rules('codigo', 'Código', 'required|integer|exact_length[4]');
     	$this->form_validation->set_rules('fecVencimiento', 'Fecha de vencimiento', 'required|date_format()');
-    	$this->form_validation->set_rules('creditos', 'Créditos', 'required|less_than[1000]');
+    	$this->form_validation->set_rules('creditos', 'Créditos', 'required|integer|less_than[1000]');
 
 
     	if($this->form_validation->run() === true)
@@ -34,11 +34,14 @@ class Comprarcredito extends CI_Controller
 			$parametro['cantidad'] = $this->input->post('creditos');
 
 			$this->mcompra->comprar($parametro);
-    	}
+    	} else {
 
-    	$this->load->view('guest/head');
-		$this->load->view('guest/nav');
-		$this->load->view("comprarcredito");
-    	$this->load->view('guest/footer');
-	}
+ 		 $this->load->view('guest/head');
+		 $this->load->view('guest/nav');
+		 //$data= $this->input->post('creditos');
+		 //$this->load->view('compra_realizada');
+		 $this->load->view("comprarcredito");
+  		 $this->load->view('guest/footer');
+  		}
+	} 
 }

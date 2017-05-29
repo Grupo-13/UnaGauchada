@@ -19,5 +19,17 @@ class Mcompra extends CI_Model
 		$this->db->insert('compra', $campos);
 	
 		$this->db->query ("UPDATE Usuario SET creditos = creditos + $parametro[cantidad] WHERE id_usuario = '". $campos['id_usuario'] ."'");
+
+		$data = $this->db->query ("SELECT creditos FROM usuario WHERE id_usuario = '". $campos['id_usuario'] ."'");
+		$data2 = $data->row();
+		$campos['creditos'] = $data2->creditos;
+		//$data2['monto']=$parametro['cantidad']*50;
+		// header("Location: " . base_url() . 'comprarcredito/compra_realizada'. $data2->creditos);
+	
+		$this->load->view('guest/head');
+		$this->load->view('guest/nav');
+		$this->load->view('compra_realizada', $campos);
+		$this->load->view('guest/footer');
 	}
+
 }

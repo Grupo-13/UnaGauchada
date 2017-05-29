@@ -1,6 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+		<?php if ($this->session->userdata('login')) { ?>
 			<br>
 			<br>
 	<h1>
@@ -27,7 +28,8 @@
 						'name' => 'nrotarjeta',
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese su número de tarjeta',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'maxlength'		=>'16'
 						);
 					echo form_input($data);
 					echo '
@@ -48,7 +50,8 @@
 						'name' => 'codigo',
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese clave de seguridad',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'maxlength'		=>'4'
 						);
 					echo form_input($data);
 					echo '
@@ -56,25 +59,18 @@
 					echo '
 					<br>';
 
+				
 
        	       	echo form_error('fecVencimiento');
-					//echo form_label('Email', 'email');
-					//echo form_input('email');
-					echo '
-					<div class="input-group">
-						<span class="input-group-addon" id="basic-addon1">Fecha de vencimiento</span>
-							';
-					$data = array(
-						'name' => 'fecVencimiento',
-						'class'        => 'form-control',
-						'placeholder'          => 'Ingrese fecha de vencimiento',
-						'aria-describedby'       => 'basic-addon1'
-						);
-					echo form_input($data);
-					echo '
-					</div>';
-					echo '
-					<br>';
+                echo '
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Fecha de vencimiento</span>
+                            ';
+                echo '<input type="date" name="fecVencimiento">';
+                    echo '
+                    </div>';
+                    echo '
+                    <br>';
 
 
        	       	echo form_error('creditos');
@@ -88,7 +84,8 @@
 						'name' => 'creditos',
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese la cantidad de créditos',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'maxlength'		=>'3'
 						);
 					echo form_input($data);
 					echo '
@@ -98,7 +95,15 @@
 			
 		echo form_submit('botonSubmit', 'Comprar');
 		echo form_close();
-	?>
+	
+	 }else{ ?>
+                     
+                     
+                     	<br><br><p> Para acceder a la compra de créditos usted debe haber iniciado sesión. </p>
+			
+                        <p><a href="<?= base_url() ?>login/ingresar"><input type="submit" value="Iniciar sesión"></a></p>
+          <?php } ?>
+
 		</div>
 	</div><!-- /.col-lg-6 -->
 </div><!-- /.row -->

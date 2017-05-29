@@ -14,7 +14,7 @@ class Detalle extends CI_Controller
 		$this->load->view("/guest/nav");
 	
 
-		$data = array('titulo' => $fila->titulo, 'descripcion' => $fila->descripcion, 'foto' => $fila->foto);
+		$data = array('titulo' => $fila->titulo, 'descripcion' => $fila->descripcion, 'fecha_maxima' =>$fila->fecha_maxima, 'foto' => $fila->foto);
 		
 		$this->load->view("/guest/post", $data);
 
