@@ -19,7 +19,7 @@ class MRegistro1 extends CI_Model
 			'nombre' => $datos['nombre'],
 			'apellido' => $datos['apellido'],
 			'dni' => $datos['dni'],
-
+			'fecha_nacimiento' => $datos['fecNac'],
 			'telefono' => $datos['tel']
 		);
 
