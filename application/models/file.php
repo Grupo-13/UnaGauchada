@@ -8,9 +8,11 @@ class File extends CI_Model {
 		$config['upload_path'] = $path;
 		$config['allowed_types'] = 'gif|jpg|png';
 		
+		
 		$this->load->library('upload', $config);
 		
 		if ( ! $this->upload->do_upload()){
+
 			$error = $this->upload->display_errors();
 			echo $this->html();
 			if($message == ''){ //cierre de php ?> 

@@ -41,8 +41,6 @@ class mpublicar extends CI_Model
 		 	// 						 						FROM calificacion as c )"
 		 	// 						// AND g.fecha_maxima > current(date)
 		 			//				 );	
-		 	
-
 
 		 	 if (($campos['id_usuario'] > 0) and ($data2->creditos > 0)) //and ($result3 === null))
 		 	 {
@@ -67,7 +65,8 @@ class mpublicar extends CI_Model
 		  	else{
 		  		if($data2->creditos === 0)
 		  		{
-		  			echo "No posee créditos suficientes."; 
+
+		  			echo "Sus créditos son insuficientes."; 
 		  		}
 
 		  		// if ($result3 != null)

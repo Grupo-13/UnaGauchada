@@ -15,6 +15,8 @@
                                 <?= substr($fila['descripcion'], 0, 100). "...";
                                  ?>
                             </h3>
+                            <img src="<?=base_url()?>public/img/<?= $fila['foto'] ?>" width=200 >
+
                         </a>
                         <p class="post-meta">Publicado por <a href="#"><?= $fila['nombre']." " . $fila['apellido']?></a> <?= $fila['fecha_publicacion']?></p>
                     </div>

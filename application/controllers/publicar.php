@@ -11,51 +11,93 @@ class Publicar extends CI_controller
 		$this->load->model('mpublicar');
 	}
 
-	public function index()
-	{
-		$this->load->view('guest/head');
-        $this->load->view('guest/nav');
-        $this->load->view("vgauchada");
-        $this->load->view('guest/footer');
-	}
+	// public function index()
+	// {
+
+ 
+	// 	$this->load->view('guest/head');
+ //        $this->load->view('guest/nav');
+
+ //        // $this->load->model('mcategorias');
+
+ //        // $result = $this->mcategorias->getCategorias();
+
+ //        // $data = array(
+ //        //     'consulta' => $result->result_array(),
+ //        // );
+ //        $this->load->view("vgauchada");
+ //        $this->load->view('guest/footer');
+
+
+	// }
 
 	
-	function nueva_gauchada()
+	public function nueva_gauchada()
 	{
 
     	$this->form_validation->set_rules('titulo', 'Título', 'required|max_length[50]');
     	$this->form_validation->set_rules('descripcion', 'Descripción', 'required|max_length[500]');
     	$this->form_validation->set_rules('datefechamax', 'Fecha máxima', 'required|date()');
-    	//$this->form_validation->set_rules('file_name', 'Foto', 'required');
+        $this->form_validation->set_rules('creditos', 'Creditos insuficientes.', 'callback_creditos');
         
     	if($this->form_validation->run() === true)
     	{
         	//Si la validación es correcta, cogemos los datos de la variable POST
         	//y los enviamos al modelo
+
         	$datos['titulo'] = $this->input->post('titulo');
         	$datos['descripcion'] = $this->input->post('descripcion');
         	$datos['datefechamax'] = $this->input->post('datefechamax');
-        	$this->load->model('file');
-        	$file_name = $this->file->UploadImage('./public/img/', 'No es posible cargar la imagen.');
-        	$datos['file_name'] = $file_name;
+
+            if ('file_name' != null) {
+        	   $this->load->model('file');
+        	   $file_name = $this->file->UploadImage('./public/img/', 'No es posible cargar la imagen.');
+        	   $datos['file_name'] = $file_name; }
             
         	$this->mpublicar->publicar($datos);
             
 
-    	}
-        $this->load->view('guest/head');
+    	}else{
+            $this->load->view('guest/head');
         $this->load->view('guest/nav');
-        $this->load->view("vgauchada");
+
+        $this->load->model('mcategorias');
+
+        $result = $this->mcategorias->getCategorias();
+
+        $data = array(
+            'consulta' => $result->result_array(),
+        );
+
+        $this->load->view("vgauchada", $data);
         $this->load->view('guest/footer');
 
+        }
+        
+
 	}
+
+    function creditos($creditos)
+    {
+        $this->load->model('usuario');
+        $fila = $this->usuario->getUsuario($this->session->userdata('email'));
+        if ($fila) {
+            if($fila->creditos == 0){
+                $this->form_validation->set_message("creditos","No posee créditos suficientes para publicar una gauchada.");
+                    return false;
+            }
+            else{
+                return true;
+            }
+        }
+        
+    }
 }
 
+?>
 
 
-
-// <?php
-// /**
+ <!--// /**
 // * 
 // */
 // class Publicar extends CI_controller

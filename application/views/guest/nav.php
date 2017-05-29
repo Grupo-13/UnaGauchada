@@ -44,7 +44,7 @@
                     
                     <?php }else{ ?>
                     <li>
-                        <a href="<?= base_url() ?>publicar">Publicar gauchada</a>
+                        <a href="<?= base_url() ?>publicar/nueva_gauchada">Publicar gauchada</a>
                     </li>
                     <li>
                         <a href="<?= base_url() ?>comprarcredito">Comprar creditos</a>
