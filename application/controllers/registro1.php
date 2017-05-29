@@ -41,17 +41,22 @@ class Registro1 extends CI_Controller {
 			$datos['tel'] = $this->input->post('tel');
 
 			$this->mregistro1->registrar($datos);
+    	}else{
+    		$this->load->view('guest/head');
+			$this->load->view('guest/nav');
+
+			$this->load->model('localidad');
+			$result = $this->localidad->getLocalidades();
+			$data = array(
+				'consulta' => $result->result_array(),
+			);
+
+    		$this->load->view("registro1", $data);
+    	 
+    		$this->load->view('guest/footer');	
     	}
 
-    	$this->load->view('guest/head');
-		$this->load->view('guest/nav');
-		// $fecha = new DateTime('2000-01-01');
-		// $fecha->add(new DateInterval('P2Y'));
-		// $fecha2 = new DateTime(date('Y-m-d'));
-		// echo $fecha < $fecha2;
-    	$this->load->view("registro1");
-    	 
-    	$this->load->view('guest/footer');
+    	
 	}
 
 	function edad($fecNac)

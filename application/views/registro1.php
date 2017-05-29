@@ -172,6 +172,23 @@
 					</div>';
 					echo '
 					<br>';
+
+
+					echo '
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1">Localidad</span>
+							';
+
+					echo '<select>';
+					foreach ($consulta as $fila) {
+  						echo '<option value="'. $fila['id_localidad'] . '">' . $fila['nombre_localidad'] . '</option>';
+  					}	
+					
+					echo '</select>';
+					echo '
+					</div>';
+					echo '
+					<br>';
 				
 				// echo '<tr><td>';
 				// echo form_error('tel');
