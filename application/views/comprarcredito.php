@@ -1,6 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+		<?php if ($this->session->userdata('login')) { ?>
 			<br>
 			<br>
 	<h1>
@@ -94,8 +95,15 @@
 			
 		echo form_submit('botonSubmit', 'Comprar');
 		echo form_close();
-	?>
 	
+	 }else{ ?>
+                     
+                     
+                     	<br><br><p> Para acceder a la compra de créditos usted debe haber iniciado sesión. </p>
+			
+                        <p><a href="<?= base_url() ?>login/ingresar"><input type="submit" value="Iniciar sesión"></a></p>
+          <?php } ?>
+
 		</div>
 	</div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
