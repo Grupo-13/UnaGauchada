@@ -142,6 +142,17 @@
 				// echo '</td><td>';
 				// echo form_input('dni');echo '<br>';
 				// echo '</td></tr>';
+				echo form_error('fecNac');
+				echo '
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1">Fecha de nacimiento</span>
+							';
+				echo '<input type="date" name="fecNac">';
+
+					echo '
+					</div>';
+					echo '
+					<br>';
 
 				echo form_error('dni');
 					//echo form_label('Email', 'email');
