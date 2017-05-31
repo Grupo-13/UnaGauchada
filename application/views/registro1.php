@@ -28,7 +28,8 @@
 						'name' => 'email',
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese su email',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'maxlength'		=>'50'
 						);
 					echo form_input($data);
 					echo '
@@ -52,7 +53,8 @@
 						'name' => 'clave',
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese su clave',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'maxlength'		=>'20'
 						);
 					echo form_password($data);
 					echo '
@@ -76,7 +78,8 @@
 						'name' => 'clave2',
 						'class'        => 'form-control',
 						'placeholder'          => 'Reingrese su clave',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'maxlength'		=>'20'
 						);
 					echo form_password($data);
 					echo '
@@ -102,7 +105,8 @@
 						'name' => 'nombre',
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese su nombre',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'maxlength'		=>'50'
 						);
 					echo form_input($data);
 					echo '
@@ -128,7 +132,8 @@
 						'name' => 'apellido',
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese su apellido',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'maxlength'		=>'50'
 						);
 					echo form_input($data);
 					echo '
@@ -165,7 +170,8 @@
 						'name' => 'dni',
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese su DNI',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'maxlength'		=>'8'
 						);
 					echo form_input($data);
 					echo '
@@ -208,7 +214,8 @@
 						'name' => 'tel',
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese su telefono',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'maxlength'		=>'15'
 						);
 					echo form_input($data);
 					echo '

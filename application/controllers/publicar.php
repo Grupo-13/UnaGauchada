@@ -103,7 +103,7 @@ class Publicar extends CI_controller
         $hoy = new DateTime(date('Y-m-d'));
         if ($nuevafecha < $hoy ) {
             
-            $this->form_validation->set_message("fecha", "La fecha no puede ser pasada");
+            $this->form_validation->set_message("fecha", "La fecha límite no puede ser anterior al día de hoy.");
             return false;
 
         }else{

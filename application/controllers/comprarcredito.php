@@ -22,7 +22,7 @@ class Comprarcredito extends CI_Controller
 	{	
 		$this->form_validation->set_rules('nrotarjeta', 'Número de tarjeta', 'required|integer|exact_length[16]');
     	$this->form_validation->set_rules('codigo', 'Código', 'required|integer|exact_length[4]');
-    	$this->form_validation->set_rules('fecVencimiento', 'Fecha de vencimiento', 'required|date_format()');
+    	$this->form_validation->set_rules('fecVencimiento', 'Fecha de vencimiento', 'required|date_format()|callback_fechaVto');
     	$this->form_validation->set_rules('creditos', 'Créditos', 'required|integer|less_than[1000]');
 
 
@@ -44,4 +44,20 @@ class Comprarcredito extends CI_Controller
   		 $this->load->view('guest/footer');
   		}
 	} 
+
+	function fechaVto($fecVencimiento)
+    {
+        $nuevafecha = new DateTime($fecVencimiento);
+        
+        $hoy = new DateTime(date('Y-m-d'));
+        if ($nuevafecha <= $hoy ) {
+            
+            $this->form_validation->set_message("fechaVto", "No se pudo efectuar la compra, su tarjeta está vencida.");
+            return false;
+
+        }else{
+                return true;
+        }
+        
+    }
 }

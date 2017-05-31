@@ -3,6 +3,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <?php
+
                     
                     foreach ($consulta as $fila) {
                 ?>
@@ -15,10 +16,13 @@
                                 <?= substr($fila['descripcion'], 0, 100). "...";
                                  ?>
                             </h3>
-                            <img src="<?=base_url()?>public/img/<?= $fila['foto'] ?>" width=200 >
+                            <?php if($fila['foto'] != Null){?>
+                            <img src="<?=base_url()?>public/img/<?= $fila['foto'] ?>" width=300 hspace=170> <?php } ?>
 
                         </a>
-                        <p class="post-meta">Publicado por <a href="#"><?= $fila['nombre']." " . $fila['apellido']?></a> <?= $fila['fecha_publicacion']?></p>
+
+
+                        <p class="post-meta">Publicado por <a href="#"><?= $fila['nombre']." " . $fila['apellido']?></a> <?php $fecha = new DateTime($fila['fecha_publicacion']); echo ' el ' .$fecha->format('d/m/Y'); ?></p>
                     </div>
                     <hr>
 
@@ -27,11 +31,11 @@
                 ?>
                 
                 <!-- Pager -->
-                <ul class="pager">
+                <!-- <ul class="pager">
                     <li class="next">
                         <a href="#">Older Posts &rarr;</a>
                     </li>
-                </ul>
+                </ul> -->
             </div>
         </div>
     </div>

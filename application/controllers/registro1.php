@@ -67,7 +67,7 @@ class Registro1 extends CI_Controller {
 		$hoy = new DateTime(date('Y-m-d'));
 		if ($nuevafecha > $hoy ) {
 			
-			$this->form_validation->set_message("edad", "Debe ser mayor de 18 años");
+			$this->form_validation->set_message("edad", "Debe ser mayor de 18 años.");
 			return false;
 
 		}else{

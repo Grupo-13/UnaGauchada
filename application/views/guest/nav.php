@@ -54,6 +54,9 @@
                     <li>
                         <a href="<?= base_url()?>login/logout">Cerrar sesión</a>
                     </li> -->
+                    <li>
+                        <a>Creditos: <?php $creditos = $this->usuario->getCreditos($this->session->userdata('id')); echo $creditos->creditos;?></a>
+                    </li>
 
                     <li class='dropdown'>
                       <a class='dropdown-toggle' href='#' data-toggle='dropdown' style="background: none;"><?= $this->session->userdata('nombre')?><strong class='caret'></strong></a>

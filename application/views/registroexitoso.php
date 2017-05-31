@@ -6,7 +6,7 @@
                      
                 		<br><br>
                         <p align="center">¡Se ha registrado correctamente con el email <?= $email ?>!</p>
-                        <p align="center">Posee 1 credito de regalo para solicitar una gauchada</p>
+                        <p align="center">Posee 1 credito de regalo para solicitar una gauchada.</p>
                         
                 	
                     

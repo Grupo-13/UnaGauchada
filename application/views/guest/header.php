@@ -5,8 +5,8 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
-                        <h1 id"logo">
-                            <img src="<?= base_url()?>/plantilla/img/avatar.png"></a>
+                        <h1 id"logo"> 
+                            <img src="<?= base_url()?>/plantilla/img/avatar.png" ></a>
                         </h1>
                         <hr class="small">
                         <span class="subheading">Una gauchada</span>

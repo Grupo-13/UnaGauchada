@@ -20,6 +20,7 @@ class Iniciarsesion extends CI_Model
 					'id' => $fila->id_usuario,
 					'login' => true,
 					'nombre' => $fila->nombre . " " . $fila->apellido,
+					'creditos' => $fila->creditos
 				);
 
 				$this->session->set_userdata($data);

@@ -3,14 +3,16 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
                 	 <?php if ($this->session->userdata('login')) { ?>
-                     
+                        <h1>Una Gauchada</h1>
                         <br>
                         <br>
                 		<h2><?= $titulo ?></h2>
                 		<p><?= $descripcion ?></p>
-                		<img src="<?=base_url()?>public/img/<?= $foto ?>"width=600 align="center">
-                        <br>
+                		<?php if($foto != Null){?>
+                        <img src="<?=base_url()?>public/img/<?= $foto ?>"width=600 hspace=60> <br> <?php } ?>
+                        
                         <p><?= 'Fecha límite: ', $fecha_maxima ?></p>
+                        <p><?= 'Lugar: ', $ciudad ?></p>
                          
                         Categorías: 
                         <!-- <table style="" border="2" bordercolor="black"><tbody>
