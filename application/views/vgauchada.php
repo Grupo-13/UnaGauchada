@@ -79,10 +79,17 @@
 						<span class="input-group-addon" id="basic-addon1">Seleccione las categorías</span>
 							';
 
-					foreach ($consulta as $fila) {
-            //<input type="checkbox" name="vehicle" value="Bike">I have a bike<br>
-       		echo '<input type="checkbox" name="categoria" value="' . $fila['id_categoria'] . '"> ' . $fila['nombre_categoria'] . '<br>';
-			}
+			$i = 0;
+			foreach ($consulta as $fila) 
+			{
+            	//<input type="checkbox" name="vehicle" value="Bike">I have a bike<br>
+       			
+       				echo '<input type="checkbox" name="categoria[]" value="' . $fila['id_categoria'] . '"> ' . $fila['nombre_categoria'] .'			';
+					$i = $i +1;
+					if($i==5){
+					echo'<br>';
+					$i=0;}
+		}
 			echo '
 					</div>'; 
 					echo '

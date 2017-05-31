@@ -9,7 +9,8 @@ class Mcategorias extends CI_Model
 
 	public function getCategorias()
 	{
-		return  $this->db->query("SELECT * FROM categoria");
+		return  $this->db->query("SELECT * FROM categoria
+									order by nombre_categoria");
 	}
 	public function getCategoriasGauchadas($id)
 	{
