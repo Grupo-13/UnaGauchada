@@ -3,7 +3,7 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
                 	 <?php if ($this->session->userdata('login')) { ?>
-                        <h1>Una Gauchada</h1>
+                      
                         <br>
                         <br>
                 		<h2><?= $titulo ?></h2>
