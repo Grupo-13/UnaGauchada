@@ -37,7 +37,7 @@ class Publicar extends CI_controller
 
     	$this->form_validation->set_rules('titulo', 'Título', 'required|max_length[50]');
     	$this->form_validation->set_rules('descripcion', 'Descripción', 'required|max_length[500]');
-    	$this->form_validation->set_rules('datefechamax', 'Fecha máxima', 'required|date()');
+    	$this->form_validation->set_rules('datefechamax', 'Fecha máxima', 'required|callback_fecha');
         $this->form_validation->set_rules('creditos', 'Creditos insuficientes.', 'callback_creditos');
         
     	if($this->form_validation->run() === true)
@@ -45,9 +45,13 @@ class Publicar extends CI_controller
         	//Si la validación es correcta, cogemos los datos de la variable POST
         	//y los enviamos al modelo
 
+
+
         	$datos['titulo'] = $this->input->post('titulo');
         	$datos['descripcion'] = $this->input->post('descripcion');
         	$datos['datefechamax'] = $this->input->post('datefechamax');
+            $datos['categoria'] = $this->input->post('categoria');
+
 
             if ('file_name' != null) {
         	   $this->load->model('file');
@@ -89,6 +93,21 @@ class Publicar extends CI_controller
             else{
                 return true;
             }
+        }
+        
+    }
+    function fecha($datefechamax)
+    {
+        $nuevafecha = new DateTime($datefechamax);
+        
+        $hoy = new DateTime(date('Y-m-d'));
+        if ($nuevafecha < $hoy ) {
+            
+            $this->form_validation->set_message("fecha", "La fecha no puede ser pasada");
+            return false;
+
+        }else{
+                return true;
         }
         
     }

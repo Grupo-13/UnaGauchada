@@ -20,6 +20,7 @@ class mpublicar extends CI_Model
 				'titulo' => $datos['titulo'],
 				'foto' => $datos['file_name'],
 				'descripcion' => $datos['descripcion']
+
 				
 			);
 			// $id_usuario = $data->id_usuario;
@@ -50,12 +51,22 @@ class mpublicar extends CI_Model
 		  		if ($insert)
 		  		{
 		  			//Update creditos de usuario. -1.
-		  			// $this->db->UPDATE('Usuario');
-		  			// $this->db->SET('creditos', 'creditos-1');
-		  			// $this->db->WHERE('id_usuario', $data->id_usuario);
 		  			$this->db->query("UPDATE Usuario
 		  						  SET creditos = creditos - 1
 		  						  WHERE id_usuario = '". $campos['id_usuario'] ."'");
+
+		  			
+		  			
+
+		  			foreach ($datos['categoria'] as $key => $value) 
+		  			{
+		  				
+		  				$categ= array(
+		  					'id_gauchada' => $insert_id,
+		  					'id_categoria' => $value);
+
+		  				$this->db->insert('pertenece', $categ);
+		  			}
 
 		  			header("Location: " . base_url() . 'detalle/post/'. $insert_id);
 
