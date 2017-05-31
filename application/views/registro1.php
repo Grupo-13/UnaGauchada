@@ -179,7 +179,7 @@
 						<span class="input-group-addon" id="basic-addon1">Localidad</span>
 							';
 
-					echo '<select>';
+					echo '<select name="locali">';
 					foreach ($consulta as $fila) {
   						echo '<option value="'. $fila['id_localidad'] . '">' . $fila['nombre_localidad'] . '</option>';
   					}	

@@ -37,6 +37,7 @@ class Registro1 extends CI_Controller {
 			$datos['nombre'] = $this->input->post('nombre');
 			$datos['apellido'] = $this->input->post('apellido');
 			$datos['fecNac'] = $this->input->post('fecNac'); 
+			$datos['id_localidad'] = $this->input->post('locali');
 			$datos['dni'] = $this->input->post('dni');
 			$datos['tel'] = $this->input->post('tel');
 
