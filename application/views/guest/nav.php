@@ -38,12 +38,14 @@
                             <button class='btn btn-primary' style='width: 380px;' type='submit'>INGRESAR</button>
                           </div>
                           </form>
-                      </div> -->
-                    </li>
+                      </div> 
+
+                    </li> -->
+
                     
                     
                     <?php }else{ ?>
-                    <li>
+                    <!-- <li>
                         <a href="<?= base_url() ?>publicar/nueva_gauchada">Publicar gauchada</a>
                     </li>
                     <li>
@@ -51,6 +53,24 @@
                     </li>
                     <li>
                         <a href="<?= base_url()?>login/logout">Cerrar sesión</a>
+                    </li> -->
+
+                    <li class='dropdown'>
+                      <a class='dropdown-toggle' href='#' data-toggle='dropdown' style="background: none;"><?= $this->session->userdata('nombre')?><strong class='caret'></strong></a>
+                      <div class='dropdown-menu' style='padding: 10px; padding-bottom: 0px; background: rgba(0, 0, 0, 0.5); width: 400px;'>
+                        <form action='<?= base_url() ?>login' method='post' accept-charset='UTF-8' role="form">
+                          <div class='form-group'>
+                            <a href="<?= base_url() ?>publicar/nueva_gauchada">Publicar gauchada</a>
+                          </div>
+                          <div class='form-group'> 
+                            <a href="<?= base_url() ?>comprarcredito">Comprar creditos</a>
+                          </div>
+                          <div class='form-group'>
+                            <a href="<?= base_url()?>login/logout">Cerrar sesión</a>
+                          </div>
+                          </form>
+                      </div> 
+
                     </li>
                     
                     

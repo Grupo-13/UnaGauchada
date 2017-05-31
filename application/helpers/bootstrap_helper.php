@@ -21,7 +21,7 @@ if(!function_exists('load_bootstrap')){
 		$bootstrap = "";
 		$bootstrap .= "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css'>";
 
-		$bootstrap .= "<script src='//code.jquery.com/jquery-1.11.2.min.js'></script>";
+		//$bootstrap .= "<script src='//code.jquery.com/jquery-1.11.2.min.js'></script>";
 		$bootstrap .= "<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js'></script>";
 		$bootstrap .= "<script src='http://markusslima.github.io/bootstrap-filestyle/js/bootstrap-filestyle.min.js'></script>";
 		return $bootstrap;
@@ -417,7 +417,7 @@ if(!function_exists('form_input_file')){
 	function form_input_file($texto = 'Seleccionar archivo')
 	{	
 		$div  = "<div class='form-group'>";
-		$div .= "<input name='userfile' type='file' id='userfile' class='filestyle' data-icon='true' data-buttonText='$texto' required=''>";	
+		$div .= "<input name='userfile' type='file' id='userfile' class='filestyle' data-icon='true' data-buttonText='$texto'>";	
 		$div .= "</div>";
 		return $div;
 	}
