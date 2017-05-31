@@ -14,7 +14,11 @@ class Detalle extends CI_Controller
 		$this->load->view("/guest/nav");
 	
 
-		$data = array('titulo' => $fila->titulo, 'descripcion' => $fila->descripcion, 'fecha_maxima' =>$fila->fecha_maxima, 'foto' => $fila->foto);
+ 		$this->load->model('mcategorias');
+
+        $result = $this->mcategorias->getCategoriasGauchadas($id);
+
+		$data = array('titulo' => $fila->titulo, 'descripcion' => $fila->descripcion, 'fecha_maxima' =>$fila->fecha_maxima, 'foto' => $fila->foto, 'id_gauchada' =>$fila->id_gauchada, 'consulta' => $result->result_array());
 		
 		$this->load->view("/guest/post", $data);
 
