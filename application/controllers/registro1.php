@@ -22,14 +22,14 @@ class Registro1 extends CI_Controller {
 	function nuevo_usuario()
 	{
     	
-    	$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[usuario.email]');
-    	$this->form_validation->set_rules('clave', 'Clave', 'required|min_length[6]|matches[clave2]');
-    	$this->form_validation->set_rules('clave2', 'Clave2', 'required|min_length[6]');
-    	$this->form_validation->set_rules('nombre', 'Nombre', 'required');
-    	$this->form_validation->set_rules('apellido', 'Apellido', 'required');
-    	$this->form_validation->set_rules('fecNac', 'Fecha de nacimiento', 'required|callback_edad');
+    	$this->form_validation->set_rules('email', 'email', 'required|valid_email|is_unique[usuario.email]');
+    	$this->form_validation->set_rules('clave', 'clave', 'required|min_length[6]|matches[clave2]');
+    	$this->form_validation->set_rules('clave2', 'clave2', 'required|min_length[6]');
+    	$this->form_validation->set_rules('nombre', 'nombre', 'required');
+    	$this->form_validation->set_rules('apellido', 'apellido', 'required');
+    	$this->form_validation->set_rules('fecNac', 'fecha de nacimiento', 'required|callback_edad');
     	$this->form_validation->set_rules('dni', 'DNI', 'required|integer|max_length[8]');
-    	$this->form_validation->set_rules('tel', 'Telefono', 'integer');
+    	$this->form_validation->set_rules('tel', 'telefono', 'required|integer');
 
     	if($this->form_validation->run() === true){
 	        $datos['email'] = $this->input->post('email');
