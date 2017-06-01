@@ -8,7 +8,7 @@ class Detalle extends CI_Controller
 	public function post ($id = '')
 	{
 		$this->load->model('usuario'); 
-		$fila = $this->gauchada->getPostById($id);
+		$fila = $this->gauchada->getPostById($id);		
 		$ciudad =  $this->usuario->getCiudad($this->session->userdata('id'));
 
 
@@ -20,11 +20,15 @@ class Detalle extends CI_Controller
 
         $result = $this->mcategorias->getCategoriasGauchadas($id);
 
-		$data = array('titulo' => $fila->titulo, 'descripcion' => $fila->descripcion, 
+        if($ciudad != false){
+			$data = array('titulo' => $fila->titulo, 'descripcion' => $fila->descripcion, 
 			'fecha_maxima' =>$fila->fecha_maxima, 'foto' => $fila->foto, 
 			'id_gauchada' =>$fila->id_gauchada, 'consulta' => $result->result_array(),
 			'ciudad' => $ciudad->nombre_localidad);
-		
+		}
+		else{
+			$data = array();
+		}
 		$this->load->view("/guest/post", $data);
 
 		$this->load->view("/guest/footer");

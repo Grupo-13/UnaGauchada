@@ -22,7 +22,8 @@
                         </a>
 
 
-                        <p class="post-meta">Publicado por <a href="#"><?= $fila['nombre']." " . $fila['apellido']?></a> <?php $fecha = new DateTime($fila['fecha_publicacion']); echo ' el ' .$fecha->format('d/m/Y'); ?></p>
+                        <p class="post-meta">Publicado por <a href="#"><?= $fila['nombre']." " . $fila['apellido']?></a>
+                            <?php $fecha = new DateTime($fila['fecha_publicacion']); echo ' el ' .$fecha->format('d/m/Y'); ?></p>
                     </div>
                     <hr>
 

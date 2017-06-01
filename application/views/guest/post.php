@@ -9,30 +9,24 @@
                 		<h2><?= $titulo ?></h2>
                 		<p><?= $descripcion ?></p>
                 		<?php if($foto != Null){?>
-                        <img src="<?=base_url()?>public/img/<?= $foto ?>"width=600 hspace=60> <br> <?php } ?>
+                            <img src="<?=base_url()?>public/img/<?= $foto ?>"width=600 hspace=60> <br> <?php } ?>
                         
-                        <p><?= 'Fecha límite: ', $fecha_maxima ?></p>
+                        <p><?php echo'Fecha límite: '; $fecha = new DateTime($fecha_maxima); echo $fecha->format('d/m/Y');?></p>
                         <p><?= 'Lugar: ', $ciudad ?></p>
                          
-                        Categorías: 
+                        Categorías:
                         <!-- <table style="" border="2" bordercolor="black"><tbody>
                             <tr> -->
                         <?php                        
-                        foreach ($consulta as $fila) { ?>
-                        
-                        <!--  <span style="" border="1" bordercolor="red"><?= $fila['nombre_categoria'] ?></span> -->
-                        <!--  <div style=”padding:12px;background-color:#COLOR;line-height:1.4;”><?= $fila['nombre_categoria'] ?></div> -->
-                       
-                        <!--   <td bgcolor= "grey"><?= $fila['nombre_categoria']?></td> -->
-                        <span style="border-image: initial; border: 2px solid #FFA500" ><?= $fila['nombre_categoria']?></span>
+                        foreach ($consulta as $fila) {?>
 
+                             <span style="border-image: initial; border: 2px solid #FFA500"><?=$fila['nombre_categoria']?></span>
 
                         <?php } 
 
                          //   echo '</tr>
                          // </tbody></table>';
-                        }else{ ?>
-                        
+                     }else{ ?>
                         <p><?= $categoria ?></p>
                      	<br><br><p> Para ver el detalle de la gauchada usted debe haber iniciado sesión. </p>
 			

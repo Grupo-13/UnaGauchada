@@ -7,6 +7,9 @@
 	<h1>
 		Comprar créditos
 	</h1>
+	<h5>
+		Sólo se aceptan tarjetas Visa y Mastercard.
+	</h5>
 	<h3>
 		Datos de compra:
 	</h3>

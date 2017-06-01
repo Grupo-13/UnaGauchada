@@ -57,7 +57,7 @@ class mpublicar extends CI_Model
 
 		  			
 		  			
-
+		  		if($datos['categoria'] != array()){
 		  			foreach ($datos['categoria'] as $key => $value) 
 		  			{
 		  				
@@ -67,6 +67,14 @@ class mpublicar extends CI_Model
 
 		  				$this->db->insert('pertenece', $categ);
 		  			}
+				}
+				else{
+					$categ= array(
+		  					'id_gauchada' => $insert_id,
+		  					'id_categoria' => 8);
+
+		  				$this->db->insert('pertenece', $categ);
+				}
 
 		  			header("Location: " . base_url() . 'detalle/post/'. $insert_id);
 

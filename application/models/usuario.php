@@ -30,18 +30,18 @@ class Usuario extends CI_Model
 
 	public function getCiudad($id)
 	{
+		if($id > 0 ){
 		$result = $this->db->query("SELECT l.nombre_localidad 
 									FROM usuario as u
 									inner join localidad as l on l.id_localidad = u.id_localidad
-		 							WHERE $id = u.id_usuario");
+		 							WHERE u.id_usuario = $id");
 
-		if ($result->num_rows() > 0) {
-			return $result->row();
-		}else{
-			return false;
+			if ($result->num_rows() > 0) {
+				return $result->row();
+			}
 		}
+		return false;
 	}
-
 	public function getCreditos($id)
 	{
 		$result = $this->db->query("SELECT creditos
