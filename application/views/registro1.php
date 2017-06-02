@@ -155,7 +155,7 @@
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">Fecha de nacimiento</span>
 							';
-				echo '<input type="date" name="fecNac" value = ' . set_value('fecNac') . '>';
+				echo '<input type="date" face="Comic Sans MS,arial" name="fecNac" value = ' . set_value('fecNac') . '>';
 
 					echo '
 					</div>';

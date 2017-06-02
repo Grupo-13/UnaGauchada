@@ -8,11 +8,13 @@
 		Comprar créditos
 	</h1>
 	<h5>
-		Sólo se aceptan tarjetas Visa y Mastercard.
+		<p>Sólo se aceptan tarjetas: Visa y Mastercard.</p>
+		<p>El valor del crédito es $50 por unidad.</p>
 	</h5>
-	<h3>
-		Datos de compra:
-	</h3>
+	<h4>
+		Datos de la compra:
+	</h4>
+	<br>
 	<?php
 		echo form_open('comprarcredito/comprar');
 
@@ -89,7 +91,6 @@
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese la cantidad de créditos',
 						'aria-describedby'       => 'basic-addon1',
-						'maxlength'		=>'3',
 						'value' => set_value('creditos')
 						);
 					echo form_input($data);

@@ -18,6 +18,9 @@
                             </h3>
                             <?php if($fila['foto'] != Null){?>
                             <img src="<?=base_url()?>public/img/<?= $fila['foto'] ?>" width=300 hspace=170> <?php } ?>
+                            
+                            <p><?php echo'Fecha límite: '; $fecha = new DateTime($fila['fecha_maxima']); echo $fecha->format('d/m/Y');?></p>
+                          <!--   <p><?= 'Lugar: ', $fila['ciudad'] ?></p> -->
 
                         </a>
 

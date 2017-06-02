@@ -23,7 +23,7 @@ class Comprarcredito extends CI_Controller
 		$this->form_validation->set_rules('nrotarjeta', 'Número de tarjeta', 'required|integer|exact_length[16]');
     	$this->form_validation->set_rules('codigo', 'Código', 'required|integer|exact_length[4]');
     	$this->form_validation->set_rules('fecVencimiento', 'Fecha de vencimiento', 'required|date_format()|callback_fechaVto');
-    	$this->form_validation->set_rules('creditos', 'Créditos', 'required|integer|less_than[1000]');
+    	$this->form_validation->set_rules('creditos', 'Créditos', 'required|integer');
 
 
     	if($this->form_validation->run() === true)
