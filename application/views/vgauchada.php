@@ -75,29 +75,35 @@
         echo form_error('file_name');
        	echo form_label('Foto ', 'file_name');
         echo form_input_file('Subir foto');
+        	echo '
+                    <br>';
 
          echo '
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">Seleccione las categorías</span>
 							';
+			echo '
+					</div>'; 
+					
+				?>
 
-			$i = 0;
-			foreach ($consulta as $fila) 
-			{
-            	//<input type="checkbox" name="vehicle" value="Bike">I have a bike<br>
+			<div class="panel panel-default">
+ 			<div class="panel-body"> 
+			<?php	$i = 0;
+				foreach ($consulta as $fila) 
+				{
+            		//<input type="checkbox" name="vehicle" value="Bike">I have a bike<br>
        			
-       				echo '<input type="checkbox" name="categoria[]" value="' . $fila['id_categoria'] . '"> ' . $fila['nombre_categoria'] .'			';
+       				echo '<input type="checkbox" name="categoria[]" value="' . $fila['id_categoria'] . '"> ' . $fila['nombre_categoria'] .'		';
 					$i = $i +1;
 					if($i==5){
 					echo'<br>';
 					$i=0;}
-		}
-			echo '
-					</div>'; 
-					echo '
-					<br>';
+				}?>
+				 </div>
+			</div>
    
-        
+        <?php
 
 		echo form_error('creditos');
 		echo form_hidden('creditos', '1');
