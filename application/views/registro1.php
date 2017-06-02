@@ -29,7 +29,8 @@
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese su email',
 						'aria-describedby'       => 'basic-addon1',
-						'maxlength'		=>'50'
+						'maxlength'		=>'50',
+						'value' => set_value('email')
 						);
 					echo form_input($data);
 					echo '
@@ -106,7 +107,8 @@
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese su nombre',
 						'aria-describedby'       => 'basic-addon1',
-						'maxlength'		=>'50'
+						'maxlength'		=>'50',
+						'value' => set_value('nombre')
 						);
 					echo form_input($data);
 					echo '
@@ -133,7 +135,8 @@
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese su apellido',
 						'aria-describedby'       => 'basic-addon1',
-						'maxlength'		=>'50'
+						'maxlength'		=>'50',
+						'value' => set_value('apellido')
 						);
 					echo form_input($data);
 					echo '
@@ -152,7 +155,7 @@
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">Fecha de nacimiento</span>
 							';
-				echo '<input type="date" name="fecNac">';
+				echo '<input type="date" name="fecNac" value = ' . set_value('fecNac') . '>';
 
 					echo '
 					</div>';
@@ -171,7 +174,8 @@
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese su DNI',
 						'aria-describedby'       => 'basic-addon1',
-						'maxlength'		=>'8'
+						'maxlength'		=>'8',
+						'value' => set_value('dni')
 						);
 					echo form_input($data);
 					echo '
@@ -185,7 +189,7 @@
 						<span class="input-group-addon" id="basic-addon1">Localidad</span>
 							';
 
-					echo '<select name="locali">';
+					echo '<select name="locali" >';
 					foreach ($consulta as $fila) {
   						echo '<option value="'. $fila['id_localidad'] . '">' . $fila['nombre_localidad'] . '</option>';
   					}	
@@ -215,7 +219,8 @@
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese su telefono',
 						'aria-describedby'       => 'basic-addon1',
-						'maxlength'		=>'15'
+						'maxlength'		=>'15',
+						'value' => set_value('tel')
 						);
 					echo form_input($data);
 					echo '

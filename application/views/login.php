@@ -23,7 +23,8 @@
 						'name' => 'email',
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese su email',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'value' => set_value('email')
 						);
 					echo form_input($data);
 					echo '

@@ -54,7 +54,8 @@
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese clave de seguridad',
 						'aria-describedby'       => 'basic-addon1',
-						'maxlength'		=>'4'
+						'maxlength'		=>'4',
+						'value' => set_value('codigo')
 						);
 					echo form_input($data);
 					echo '
@@ -69,7 +70,7 @@
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">Fecha de vencimiento</span>
                             ';
-                echo '<input type="date" name="fecVencimiento">';
+                echo '<input type="date" name="fecVencimiento"  value = ' . set_value('fecVencimiento') . '>';
                     echo '
                     </div>';
                     echo '
@@ -88,7 +89,8 @@
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese la cantidad de créditos',
 						'aria-describedby'       => 'basic-addon1',
-						'maxlength'		=>'3'
+						'maxlength'		=>'3',
+						'value' => set_value('creditos')
 						);
 					echo form_input($data);
 					echo '

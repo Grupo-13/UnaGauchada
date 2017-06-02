@@ -9,7 +9,7 @@
                             <img src="<?= base_url()?>/plantilla/img/avatar.png" ></a>
                         </h1>
                         <hr class="small">
-                        <span class="subheading">Una gauchada</span>
+                        <span class="subheading"><big><big><big><strong><font color="#F97508">Una gauchada</font></big></big></big></strong></span>
                     </div>
                 </div>
             </div>

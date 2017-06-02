@@ -26,7 +26,8 @@
 						'name' => 'titulo',
 						'class'        => 'form-control',
 						'placeholder'          => 'Título',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'value' => set_value('titulo')
 						);
 					echo form_input($data);
 					echo '
@@ -46,7 +47,8 @@
 						'name' => 'descripcion',
 						'class'        => 'form-control',
 						'placeholder'          => 'Descripción',
-						'aria-describedby'       => 'basic-addon1'
+						'aria-describedby'       => 'basic-addon1',
+						'value' => set_value('descripcion')
 						);
 					echo form_input($data);
 					echo '
@@ -64,7 +66,7 @@
    		//echo form_label('Fecha límite ');
    		 echo ' <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">Fecha límite</span> ';
-         echo '<input type="date" name="datefechamax">';
+         echo '<input type="date" name="datefechamax" value = ' . set_value('fecNac') . '>';
          echo '
                     </div>';
                     echo '
