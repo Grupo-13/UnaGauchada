@@ -30,7 +30,7 @@
                          //   echo '</tr>
                          // </tbody></table>';
                      }else{ ?>
-                        <p><?= $categoria ?></p>
+                        
                      	<br><br><p> Para ver el detalle de la gauchada usted debe haber iniciado sesión. </p>
 			
                         <p><a href="<?= base_url() ?>login/ingresar"><input type="submit" value="Iniciar sesión"></a></p>

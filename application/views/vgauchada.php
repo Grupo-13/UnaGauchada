@@ -8,7 +8,9 @@
 		Publicar gauchada
 		
 	</h2>
-	<?php if ($this->session->userdata('login')){
+	<?php 
+	$creditos = $this->usuario->getCreditos($this->session->userdata('id'));
+	if ($creditos->creditos > 0){
 
 
 		//echo validation_errors();
