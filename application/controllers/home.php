@@ -9,6 +9,9 @@ class Home extends CI_Controller
 	public function index()
 	{
 		
+		$this->load->model('usuario'); 
+		$this->load->model('mcategorias');
+		
 		$this->load->view('guest/head');
 		$this->load->view('guest/nav');
 		$this->load->view('guest/header');

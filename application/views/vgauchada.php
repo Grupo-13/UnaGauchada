@@ -1,4 +1,3 @@
-
 <div class="container">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -8,7 +7,9 @@
 		Publicar gauchada
 		
 	</h2>
-	<?php if ($this->session->userdata('login')){
+	<?php 
+	$creditos = $this->usuario->getCreditos($this->session->userdata('id'));
+	if ($creditos->creditos > 0){
 
 
 		//echo validation_errors();
@@ -117,13 +118,13 @@
  
     	echo '<br>';
    
-    	echo "Para publicar una gauchada debe estar registrado." ; ?>
+    	echo "Para publicar una gauchada necesita tener 1 crédito." ; ?>
    		
-    	<form action ="<?php echo base_url();?>registro1/nuevo_usuario">
+    	<form action ="<?php echo base_url();?>comprarcredito/comprar">
     	<table>
     	<tr>
     		<br>
-			<td colspan="2"><input type = "submit" value = "Registrarse" /td>
+			<td colspan="2"><input type = "submit" value = "Comprar Creditos" /td>
 		</tr>
 		</table>
 		</form>

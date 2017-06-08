@@ -6,7 +6,8 @@
 
                     
                     foreach ($consulta as $fila) {
-                ?>
+               
+                      ?>
                      <div class="post-preview">
                         <a href="<?= base_url()?>detalle/post/<?= $fila['id_gauchada']?>">
                             <h2 class="post-title">
@@ -20,7 +21,20 @@
                             <img src="<?=base_url()?>public/img/<?= $fila['foto'] ?>" width=300 hspace=170> <?php } ?>
                             
                             <p><?php echo'Fecha límite: '; $fecha = new DateTime($fila['fecha_maxima']); echo $fecha->format('d/m/Y');?></p>
-                          <!--   <p><?= 'Lugar: ', $fila['ciudad'] ?></p> -->
+                            <p><?php echo 'Lugar: '; $ciudad =  $this->usuario->getCiudad($fila['id_usuario']); echo $ciudad->nombre_localidad ?></p>
+
+                            <?php $result = $this->mcategorias->getCategoriasGauchadas($fila['id_gauchada']); ?>
+                            Categorías: 
+                        
+                             <?php    
+                          
+
+                            foreach ($result->id_categoria as $tupla) {?>
+
+                                <span style="border-image: initial; border: 2px solid #FFA500"><?php echo $tupla['nombre_categoria']?></span>
+
+                            <?php } ?>
+
 
                         </a>
 

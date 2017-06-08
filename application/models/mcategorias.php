@@ -14,7 +14,7 @@ class Mcategorias extends CI_Model
 	}
 	public function getCategoriasGauchadas($id)
 	{
-		return  $this->db->query("SELECT c.nombre_categoria 
+		return  $this->db->query("SELECT c.nombre_categoria, c.id_categoria
 								  FROM categoria as c 
 								  Inner join pertenece as p on p.id_categoria = c.id_categoria
 								  WHERE p.id_gauchada=$id");

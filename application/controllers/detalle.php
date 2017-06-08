@@ -9,7 +9,8 @@ class Detalle extends CI_Controller
 	{
 		$this->load->model('usuario'); 
 		$fila = $this->gauchada->getPostById($id);		
-		$ciudad =  $this->usuario->getCiudad($this->session->userdata('id'));
+	
+		$ciudad =  $this->usuario->getCiudad($fila->id_usuario);
 
 
 		$this->load->view("/guest/head");
