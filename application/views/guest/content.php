@@ -23,15 +23,16 @@
                             <p><?php echo'Fecha límite: '; $fecha = new DateTime($fila['fecha_maxima']); echo $fecha->format('d/m/Y');?></p>
                             <p><?php echo 'Lugar: '; $ciudad =  $this->usuario->getCiudad($fila['id_usuario']); echo $ciudad->nombre_localidad ?></p>
 
-                            <?php $result = $this->mcategorias->getCategoriasGauchadas($fila['id_gauchada']); ?>
+                            <?php $result = $this->mcategorias->getCategoriasGauchadas($fila['id_gauchada']);
+                            $data = $result->result_array();  ?>
                             Categorías: 
                         
                              <?php    
                           
 
-                            foreach ($result->id_categoria as $tupla) {?>
+                            foreach ($data as $row) {?>
 
-                                <span style="border-image: initial; border: 2px solid #FFA500"><?php echo $tupla['nombre_categoria']?></span>
+                                <span style="border-image: initial; border: 2px solid #FFA500"><?php echo $row['nombre_categoria']?></span>
 
                             <?php } ?>
 

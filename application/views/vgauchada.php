@@ -51,7 +51,7 @@
 						'aria-describedby'       => 'basic-addon1',
 						'value' => set_value('descripcion')
 						);
-					echo form_input($data);
+					echo form_textarea($data);
 					echo '
 					</div>';
 					echo '

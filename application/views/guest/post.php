@@ -23,10 +23,34 @@
 
                              <span style="border-image: initial; border: 2px solid #FFA500"><?=$fila['nombre_categoria']?></span>
 
-                        <?php } ?>
+                        <?php } $id = $id_gauchada;?>
+                        <br><br>
+
+                          <?= 'Cantidad de postulados: ', $cant_postulados ?>
+
+                         
+                          <?php $postulado = $this->gauchada->estoyPostulado($id_gauchada);
+
+                          if(!$postulado){?>
+                          <form action ="<?php echo base_url();?>detalle/postularse/<?= $id?>">
+                         <table>
+                         <tr> 
+                         <br>
+                           <td colspan="2"><input type = "submit" value = "Postularse" /td>
+                         </tr>
+                         </table>
+                         </form>
+                         <?php } else
+                         {
+                            echo '<br>';
+                            echo 'Usted está postulado para resolver esta gauchada.';
+                         }?>
+
 
                     	   </div>
                       </div>
+                      
+
                 </div>
             </div>
         </div>
