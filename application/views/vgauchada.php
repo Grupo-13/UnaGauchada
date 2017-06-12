@@ -52,7 +52,7 @@
 						'aria-describedby'       => 'basic-addon1',
 						'value' => set_value('descripcion')
 						);
-					echo form_input($data);
+					echo form_textarea($data);
 					echo '
 					</div>';
 					echo '
@@ -119,13 +119,13 @@
  
     	echo '<br>';
    
-    	echo "Para publicar una gauchada debe estar registrado." ; ?>
+    	echo "Para publicar una gauchada debe tener 1 crédito." ; ?>
    		
-    	<form action ="<?php echo base_url();?>registro1/nuevo_usuario">
+    	<form action ="<?php echo base_url();?>comprarcredito/comprar">
     	<table>
     	<tr>
     		<br>
-			<td colspan="2"><input type = "submit" value = "Registrarse" /td>
+			<td colspan="2"><input type = "submit" value = "Comprar créditos" /td>
 		</tr>
 		</table>
 		</form>
