@@ -34,7 +34,8 @@
 						'class'        => 'form-control',
 						'placeholder'          => 'Ingrese su número de tarjeta',
 						'aria-describedby'       => 'basic-addon1',
-						'maxlength'		=>'16'
+						'maxlength'		=>'16',
+						'value' => set_value('nrotarjeta')
 						);
 					echo form_input($data);
 					echo '
