@@ -21,7 +21,7 @@
                             <img src="<?=base_url()?>public/img/<?= $fila['foto'] ?>" width=300 hspace=170> <?php } ?>
                             
                             <p><?php echo'Fecha límite: '; $fecha = new DateTime($fila['fecha_maxima']); echo $fecha->format('d/m/Y');?></p>
-                            <p><?php echo 'Lugar: '; $ciudad =  $this->usuario->getCiudad($fila['id_usuario']); echo $ciudad->nombre_localidad ?></p>
+                            <p><?php echo 'Lugar: '; $ciudad = $this->gauchada->getCiudadGauchada($fila['id_gauchada']); echo $ciudad->nombre_localidad ?></p>
 
                             <?php $result = $this->mcategorias->getCategoriasGauchadas($fila['id_gauchada']);
                             $data = $result->result_array();  ?>
@@ -34,10 +34,28 @@
 
                                 <span style="border-image: initial; border: 2px solid #FFA500"><?php echo $row['nombre_categoria']?></span>
 
-                            <?php } ?>
+                            <?php }
+                            $id = $fila['id_gauchada'] ?>
 
 
                         </a>
+
+                            <?php if($this->session->userdata('login'))
+                                    {
+                                         if($this->session->userdata('id') == $fila['id_usuario'])
+                                         {?>
+                                            <table>
+                                            <form action ="<?php echo base_url();?>publicarYANI/modificarGauchada/<?= $id?>">                        
+                                                <br>
+                                                <td colspan="2"><input type = "submit" value = "Modificar" /td>
+                                            </form>
+                                            <form action ="<?php echo base_url();?>comprarcredito/comprar">
+                                                <td colspan="2"><input type = "submit" value = "Despublicar" /td>
+                                            </form>
+                                            </table>
+                                        <?php }   
+
+                                    }   ?>
 
 
                         <p class="post-meta">Publicado por <a href="#"><?= $fila['nombre']." " . $fila['apellido']?></a>
@@ -59,4 +77,4 @@
         </div>
     </div>
 
-    <hr>
+<hr>

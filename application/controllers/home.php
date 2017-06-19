@@ -11,6 +11,7 @@ class Home extends CI_Controller
 		
 		$this->load->model('usuario'); 
 		$this->load->model('mcategorias');
+		$this->load->model('localidad');
 		
 		$this->load->view('guest/head');
 		$this->load->view('guest/nav');

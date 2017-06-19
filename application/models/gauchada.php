@@ -14,7 +14,7 @@ class Gauchada extends CI_Model
 										l.nombre_localidad, l.id_localidad
 								FROM usuario as u
 								INNER JOIN gauchada as g on g.id_usuario = u.id_usuario
-								INNER JOIN localidad as l on u.id_localidad = l.id_localidad
+								INNER JOIN localidad as l on g.id_localidad = l.id_localidad
 								ORDER BY g.fecha_publicacion DESC ");
 	}
 
@@ -64,7 +64,21 @@ class Gauchada extends CI_Model
 			}
 	}
 
-	
+	public function getCiudadGauchada($id)
+	{
+		if($id > 0 ){
+		$result = $this->db->query("SELECT l.nombre_localidad, l.id_localidad
+									FROM gauchada as g
+									inner join localidad as l on l.id_localidad = g.id_localidad
+		 							WHERE g.id_gauchada = $id");
+
+			if ($result->num_rows() > 0) {
+				return $result->row();
+			}
+		}
+		return false;
+
+	}
 	public function estoyPostulado($id = '')
 	{
 		$result = $this->db->query("SELECT g.id_usuario

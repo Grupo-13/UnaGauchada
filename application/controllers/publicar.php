@@ -51,6 +51,7 @@ class Publicar extends CI_controller
         	$datos['descripcion'] = $this->input->post('descripcion');
         	$datos['datefechamax'] = $this->input->post('datefechamax');
             $datos['categoria'] = $this->input->post('categoria');
+            $datos['id_localidad'] = $this->input->post('locali');
 
 
             if ('file_name' != null) {
@@ -68,9 +69,15 @@ class Publicar extends CI_controller
         $this->load->model('mcategorias');
 
         $result = $this->mcategorias->getCategorias();
+        $this->load->model('localidad');
+        
+        $result2 = $this->localidad->getLocalidades();
+        
+
 
         $data = array(
             'consulta' => $result->result_array(),
+            'consulta2' => $result2->result_array(),
         );
 
         $this->load->view("vgauchada", $data);

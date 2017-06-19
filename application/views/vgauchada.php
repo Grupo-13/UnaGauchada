@@ -1,3 +1,4 @@
+
 <div class="container">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -106,6 +107,22 @@
    
         <?php
 
+       				 echo '
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1">Localidad</span>
+							';
+
+					echo '<select name="locali" >';
+					foreach ($consulta2 as $tupla) {
+  						echo '<option value="'. $tupla['id_localidad'] . '">' . $tupla['nombre_localidad'] . '</option>';
+  					}	
+					
+					echo '</select>';
+					echo '
+					</div>';
+					echo '
+					<br>';
+
 		echo form_error('creditos');
 		echo form_hidden('creditos', '1');
 
@@ -118,13 +135,13 @@
  
     	echo '<br>';
    
-    	echo "Para publicar una gauchada necesita tener 1 crédito." ; ?>
+    	echo "Para publicar una gauchada debe tener 1 crédito." ; ?>
    		
     	<form action ="<?php echo base_url();?>comprarcredito/comprar">
     	<table>
     	<tr>
     		<br>
-			<td colspan="2"><input type = "submit" value = "Comprar Creditos" /td>
+			<td colspan="2"><input type = "submit" value = "Comprar créditos" /td>
 		</tr>
 		</table>
 		</form>

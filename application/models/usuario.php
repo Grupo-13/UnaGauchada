@@ -28,10 +28,10 @@ class Usuario extends CI_Model
 		}
 	}
 
-	public function getCiudad($id)
+	public function getCiudadUsuario($id)
 	{
 		if($id > 0 ){
-		$result = $this->db->query("SELECT l.nombre_localidad 
+		$result = $this->db->query("SELECT l.nombre_localidad, l.id_localidad
 									FROM usuario as u
 									inner join localidad as l on l.id_localidad = u.id_localidad
 		 							WHERE u.id_usuario = $id");

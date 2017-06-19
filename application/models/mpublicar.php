@@ -19,6 +19,7 @@ class mpublicar extends CI_Model
 		  		'id_usuario' => $this->session->userdata('id'), //Id del usuario que esta logueado.
 				'titulo' => $datos['titulo'],
 				'foto' => $datos['file_name'],
+				'id_localidad' => $datos['id_localidad'],
 				'descripcion' => $datos['descripcion']
 
 				

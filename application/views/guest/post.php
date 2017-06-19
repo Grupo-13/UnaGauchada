@@ -13,7 +13,7 @@
                             </div>
                          <div class="panel-footer">
                          <p><?php echo'Fecha límite: '; $fecha = new DateTime($fecha_maxima); echo $fecha->format('d/m/Y');?></p>
-                         <p><?= 'Lugar: ', $ciudad ?></p>
+                         <p><?= 'Lugar: ', $ciudad ?></p> 
                          
                         Categorías:
                         <!-- <table style="" border="2" bordercolor="black"><tbody>
