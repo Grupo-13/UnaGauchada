@@ -21,6 +21,9 @@
 							
 							<p><?php echo'Fecha límite: '; $fecha = new DateTime($fila['fecha_maxima']); echo $fecha->format('d/m/Y');?></p>
 						<p><?= 'Lugar: ', $fila['nombre_localidad'] ?></p>
+
+						Categorías:
+						
 						<?php                        
                         
 
