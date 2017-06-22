@@ -136,14 +136,11 @@ $config['subclass_prefix'] = 'MY_';
 */
 // $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 $config['permitted_uri_chars']  = ''; #keep it blank to allow all characters
-<<<<<<< HEAD
+
 $config['allow_get_array']      = TRUE;
 $config['enable_query_strings'] = TRUE;
 
-=======
-$config['allow_get_array']       = TRUE;
-$config['enable_query_strings'] = TRUE;
->>>>>>> origin/master
+
 
 /*
 |--------------------------------------------------------------------------

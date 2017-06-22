@@ -17,7 +17,6 @@ class Usuario extends CI_Model
 		}
 	}
 
-<<<<<<< HEAD
 	public function getUsuarioById($id)
     {
         $result = $this->db->query("SELECT * FROM usuario WHERE id_usuario = '" . $id . "' LIMIT 1");
@@ -29,8 +28,6 @@ class Usuario extends CI_Model
         }
     }
 
-=======
->>>>>>> origin/master
 	public function getNombreUsuario($id)
 	{
 		$result = $this->db->query("SELECT nombre, apellido, foto
