@@ -35,7 +35,7 @@
                                 <span style="border-image: initial; border: 2px solid #FFA500"><?php echo $row['nombre_categoria']?></span>
 
                             <?php }
-                            $id = $fila['id_gauchada'] ?>
+                            ?>
 
 
                         </a>
@@ -43,9 +43,10 @@
                             <?php if($this->session->userdata('login'))
                                     {
                                          if($this->session->userdata('id') == $fila['id_usuario'])
-                                         {?>
+                                         {
+                                            $id = $fila['id_gauchada'] ?>
                                             <table>
-                                            <form action ="<?php echo base_url();?>publicarYANI/modificarGauchada/<?= $id?>">                        
+                                            <form action ="<?php echo base_url();?>publicar/modificarGauchada/<?= $id?>">                        
                                                 <br>
                                                 <td colspan="2"><input type = "submit" value = "Modificar" /td>
                                             </form>
@@ -58,7 +59,7 @@
                                     }   ?>
 
 
-                        <p class="post-meta">Publicado por <a href="#"><?= $fila['nombre']." " . $fila['apellido']?></a>
+                        <p class="post-meta">Publicado por <a href="<?= base_url()?>perfil/usuario/<?= $fila['id_usuario']?>"><?= $fila['nombre']." " . $fila['apellido']?></a>
                             <?php $fecha = new DateTime($fila['fecha_publicacion']); echo ' el ' .$fecha->format('d/m/Y'); ?></p>
                     </div>
                     <hr>

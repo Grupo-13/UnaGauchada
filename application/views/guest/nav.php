@@ -63,6 +63,9 @@
                       <div class='dropdown-menu' style='padding: 10px; padding-bottom: 0px; background: rgba(0, 0, 0, 0.5); width: 400px;'>
                         <form action='<?= base_url() ?>login' method='post' accept-charset='UTF-8' role="form">
                           <div class='form-group'>
+                            <a href="<?= base_url()?>perfil/usuario/<?= $this->session->userdata('id');?>">Mi perfil</a>
+                          </div>
+                          <div class='form-group'>
                             <a href="<?= base_url() ?>publicar/nueva_gauchada">Publicar gauchada</a>
                           </div>
                           <div class='form-group'> 
