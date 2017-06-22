@@ -88,5 +88,8 @@ class Gauchada extends CI_Model
 									"AND  p.id_gauchada = '". $id . "'");
 		return $result->row();
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 }

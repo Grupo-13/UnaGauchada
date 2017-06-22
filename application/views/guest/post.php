@@ -1,6 +1,7 @@
-		<div class="container">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<<<<<<< HEAD
                       
                         <br>
                         <br>
@@ -47,6 +48,66 @@
                          }?>
 
                         <br>
+=======
+
+                        <br>
+                        <br>
+                        <div class="panel panel-default">
+                                <div class="panel-body">    
+                                  <center><h2><?=$titulo ?></h2></center>
+                                  <p align = "justify"><?= $descripcion ?></p>
+                                  <?php if($foto != Null){ ?>
+                                      <img src="<?=base_url()?>public/img/<?= $foto ?>"width=600 hspace=60> <br> 
+                                  <?php } ?>
+                                </div> 
+                        </div>
+                        <div class="panel-footer">
+                             <p><?php echo'Fecha límite: '; $fecha = new DateTime($fecha_maxima); echo $fecha->format('d/m/Y');?></p>
+                             <p><?= 'Lugar: ', $ciudad ?></p>
+
+                                 
+                                Categorías:
+                               
+                                <?php                        
+                                foreach ($consulta as $fila) { ?>
+
+                                     <span style="border-image: initial; border: 2px solid #FFA500"><?=$fila['nombre_categoria']?></span>
+
+                                
+
+                                <?php } ?>
+
+                                <br>
+
+                                <?php
+
+                                if($this->session->userdata('login'))
+                                {
+                                                if($this->session->userdata('id') == $id_usuario)
+                                                { ?>
+                                                   <table>
+                                                   <form action ="<?php echo base_url();?>publicar/modificarGauchada/<?= $id_gauchada?>">                        
+                                                       <br>
+                                                       <td colspan="2"><input type = "submit" value = "Modificar" /td>
+                                                   </form>
+                                                   <form action ="<?php echo base_url();?>publicar/eliminargauchada">
+                                                       <td colspan="2"><input type = "submit" value = "Despublicar" /td>
+                                                   </form>
+                                                   </table>
+                                               <?php }  
+
+                                } 
+                                ?>
+                        
+
+                        <br>
+                       
+
+
+
+
+
+>>>>>>> origin/master
                         <h3>Comentarios</h3>
                         <br>
                         
@@ -82,6 +143,12 @@
                         if ($f['respuesta'] != NULL) 
                         { ?>
                             <ul><i>
+<<<<<<< HEAD
+=======
+                            <strong>Respuesta</strong> 
+                            <br>
+                            <br>
+>>>>>>> origin/master
                             <?php
                             if ($usuario->foto == NULL) 
                             { ?>
@@ -98,6 +165,10 @@
                             <br>
                             <ul><?=$f['respuesta']?></ul>
                             
+<<<<<<< HEAD
+=======
+                            
+>>>>>>> origin/master
                             </i></ul>
                         <?php 
                         } ?>
@@ -107,6 +178,12 @@
                          <?php if ($this->session->userdata('login'))
                                 {
                                         if (($this->session->userdata('id') == $id_usuario) & ($f['respuesta'] == NULL)){ ?>
+<<<<<<< HEAD
+=======
+                                            <br>
+                                            <br>
+
+>>>>>>> origin/master
                                             <?php
         
                                             echo form_open('detalle/respuesta/' . $f['id_comentario']);
@@ -181,12 +258,18 @@
                                                             
 
                         } ?>
+<<<<<<< HEAD
 
 
                     	   </div>
                       </div>
                       
 
+=======
+                          <!--   </div>
+                        </body>
+                        </html>  -->                      
+>>>>>>> origin/master
                 </div>
             </div>
         </div>

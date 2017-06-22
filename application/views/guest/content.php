@@ -1,3 +1,4 @@
+<<<<<<< HEAD
     <!-- Main Content -->
     <div class="container">
         <div class="row">
@@ -26,6 +27,35 @@
                             <?php $result = $this->mcategorias->getCategoriasGauchadas($fila['id_gauchada']);
                             $data = $result->result_array();  ?>
                             Categorías: 
+=======
+	<!-- Main Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				<?php
+
+					
+					foreach ($consulta as $fila) {
+				?>
+					 <div class="post-preview">
+						<a href="<?= base_url()?>detalle/post/<?= $fila['id_gauchada']?>">
+							<h2 class="post-title">
+								<?= $fila['titulo']; ?>
+							</h2>
+							<h3 class="post-subtitle">
+								<?= substr($fila['descripcion'], 0, 100). "...";
+								 ?>
+							</h3>
+							<?php if($fila['foto'] != Null){?>
+							<img src="<?=base_url()?>public/img/<?= $fila['foto'] ?>" width=300 hspace=170> <?php } ?>
+							
+							<p><?php echo'Fecha límite: '; $fecha = new DateTime($fila['fecha_maxima']); echo $fecha->format('d/m/Y');?></p>
+						<p><?= 'Lugar: ', $fila['nombre_localidad'] ?></p>
+
+						Categorías:
+						
+						<?php                        
+>>>>>>> origin/master
                         
                              <?php    
                           

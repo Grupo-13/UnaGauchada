@@ -1,0 +1,33 @@
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;	
+}
+a {
+	color:#03658c;
+	text-decoration: none;
+}
+
+ul{
+	list-style-type: none;
+}
+
+body {
+	font-family: Verdana;
+	background: #dee1e3;
+
+}
+
+.comments-container{
+	margin:60px auto 15px;
+	width: 768px;
+}
+
+.comments-container h5{
+	font-size: 36px;
+	color: #283035;
+	font-weight: 400;
+	
+}
