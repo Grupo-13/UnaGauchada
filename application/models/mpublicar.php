@@ -99,4 +99,88 @@ class mpublicar extends CI_Model
 		  	}
 		
 	}
+
+
+	public function modificar($datos)
+	{
+		$campos = array(
+
+		  		'fecha_maxima' => $datos['datefechamax'],
+				'titulo' => $datos['titulo'],
+				'foto' => $datos['file_name'],
+				'descripcion' => $datos['descripcion'],
+				'id_localidad' => $datos['id_localidad'],
+				
+
+			);
+		$id_gauchada = $datos['id_gauchada'];
+
+		$this->db->where('id_gauchada', $id_gauchada);
+		$this->db->update('gauchada', $campos);	
+			
+  		/*$this->db->query("UPDATE gauchada
+  						  SET descripcion = $campos['descripcion'] 
+  						  WHERE id_gauchada = $campos['id_gauchada'] ");*/
+
+  			//Con las categorias, hay que insertar o modificar segun corresponda,
+  			//por ahi lo mejor es elimiar todas e insertar nuevamente. 
+
+		$this->db->query("DELETE FROM pertenece
+						WHERE $id_gauchada = id_gauchada");
+				  			
+  		if($datos['categoria'] != array()){
+
+  			foreach ($datos['categoria'] as $key => $value) 
+  			{
+  				
+  				$categ= array(
+  					'id_gauchada' => $id_gauchada,
+  					'id_categoria' => $value);
+
+  				$this->db->insert('pertenece', $categ);
+  			}
+		}
+		else{
+			$categ= array(
+  					'id_gauchada' =>  $id_gauchada,
+  					'id_categoria' => 8);
+
+  			$this->db->insert('pertenece', $categ);
+		}
+
+  			header("Location: " . base_url() . 'detalle/post/'. $id_gauchada);
+
+  	}	
+
+  	public function eliminarGauchadaSinPostulados($id = '')
+    {
+    	$this->load->view("/guest/head");
+        $this->load->view("/guest/nav");
+        $this->db->query("DELETE FROM gauchada
+                             WHERE id_gauchada = '". $id ."'");
+
+        //Hay que ver bien el tema de la integridad referencial porque eso va a hacer, que al eliminar
+        //la gauchada se eliminen tambien sus postulados y categorias.
+          
+        $this->load->view("/vEliminacionSinPostulados");
+        $this->load->view("/guest/footer");
+      
+
+    }
+
+    public function eliminarGauchadaConPostulados($id = '')
+    {
+    	$this->load->view("/guest/head");
+        $this->load->view("/guest/nav");
+        $this->db->query("DELETE FROM gauchada
+                             WHERE id_gauchada = '". $id ."'");
+
+        //Hay que ver bien el tema de la integridad referencial porque eso va a hacer, que al eliminar
+        //la gauchada se eliminen tambien sus postulados y categorias.
+          
+        $this->load->view("/vEliminacionConPostulados");
+        $this->load->view("/guest/footer");
+      
+
+    }
 }

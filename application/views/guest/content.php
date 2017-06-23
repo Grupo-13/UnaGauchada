@@ -50,7 +50,7 @@
                                                 <br>
                                                 <td colspan="2"><input type = "submit" value = "Modificar" /td>
                                             </form>
-                                            <form action ="<?php echo base_url();?>comprarcredito/comprar">
+                                            <form action ="<?php echo base_url();?>publicar/despublicar/<?= $id?>">
                                                 <td colspan="2"><input type = "submit" value = "Despublicar" /td>
                                             </form>
                                             </table>

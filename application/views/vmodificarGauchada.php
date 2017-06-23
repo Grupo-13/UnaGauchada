@@ -14,6 +14,7 @@
 		
 		echo form_open_multipart('publicar/modificar/'.$id_gauchada);
 		echo '<br>';
+		echo form_hidden('id_gau', $id_gauchada);
 		echo form_error('titulo');
 
         echo '<div class="input-group">
@@ -88,10 +89,17 @@
  			<div class="panel-body"> 
 			<?php	$i = 0;
 				foreach ($categorias as $fila) 
-				{
+				{	
+					foreach ($categ as $row) 
+					{
             		//<input type="checkbox" name="vehicle" value="Bike">I have a bike<br>
-       			
-       				echo '<input type="checkbox" name="categoria[]" value="' . $fila['id_categoria'] . '"> ' . $fila['nombre_categoria'] .'		';
+	       				if ($fila['id_categoria'] == $row['id_categoria']){
+	       					echo '<input type="checkbox" name="categoria[]" value="' . $fila['id_categoria'] . '" checked> ' . $fila['nombre_categoria'] .' 	';
+						}
+						else {
+							echo '<input type="checkbox" name="categoria[]" value="' . $fila['id_categoria'] . '"> ' . $fila['nombre_categoria'] .' 	';
+						}
+					}	
 					$i = $i +1;
 					
 					if($i==5){
@@ -111,7 +119,13 @@
 
 		echo '<select name="localidades" >';
 		foreach ($localidades as $tupla) {
-				echo '<option value="'. $tupla['id_localidad'] . '">' . $tupla['nombre_localidad'] . '</option>';
+
+				if($tupla['id_localidad'] == $id_localidad){
+					echo '<option selected value="'. $tupla['id_localidad'] . '">' . $tupla['nombre_localidad'] . '</option>';
+				}
+				else{
+					echo '<option value="'. $tupla['id_localidad'] . '">' . $tupla['nombre_localidad'] . '</option>';
+				}
 			}	
 		
 		echo '</select>';

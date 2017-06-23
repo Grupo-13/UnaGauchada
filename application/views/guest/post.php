@@ -13,7 +13,7 @@
 												 <div class="panel-footer">
 												 <p><?php echo'Fecha límite: '; $fecha = new DateTime($fecha_maxima); echo $fecha->format('d/m/Y');?></p>
 												 <p><?= 'Lugar: ', $ciudad ?></p> 
-												 
+
 												Categorías:
 												<!-- <table style="" border="2" bordercolor="black"><tbody>
 														<tr> -->
@@ -25,32 +25,31 @@
 												<?php } $id = $id_gauchada;?>
 												<br><br>
 
-													<?= 'Cantidad de postulados: ', $cant_postulados ?>
-
-												 
-													<?php $postulado = $this->gauchada->estoyPostulado($id_gauchada);
-
-													if(!$postulado){?>
-													<form action ="<?php echo base_url();?>detalle/postularse/<?= $id?>">
-												 <table>
-												 <tr> 
-												 <br>
-													 <td colspan="2"><input type = "submit" value = "Postularse" /td>
-												 </tr>
-												 </table>
-												 </form>
-												 <?php } else
-												 {
-														echo '<br>';
-														echo 'Usted está postulado para resolver esta gauchada.';
-												 }?>
+													<?= 'Cantidad de postulados: ', $cant_postulados;
+													$postulado = $this->gauchada->estoyPostulado($id_gauchada); ?>
 
 												<br>
 													<?php
 
-													if($this->session->userdata('login'))
-													{
-															if($this->session->userdata('id') == $id_usuario)
+													if ($this->session->userdata('login')){
+
+														if ($this->session->userdata('id') != $id_usuario){
+																if(!($postulado)){?>
+																	<form action ="<?php echo base_url();?>detalle/postularse/<?= $id?>">
+																  <table>
+																  <tr> 
+																  <br>
+																	<td colspan="2"><input type = "submit" value = "Postularse" /td>
+																  </tr>
+																  </table>
+																  </form>
+															 <?php } else
+															 {
+																	echo '<br>';
+																	echo 'Usted está postulado para resolver esta gauchada.';
+															 }
+														} 
+														else
 															{ ?>
 																 <table>
 																 <form action ="<?php echo base_url();?>publicar/modificarGauchada/<?= $id_gauchada?>">                        
@@ -63,9 +62,8 @@
 																 </table>
 														 <?php }  
 
-													} 
-													?>
-												
+												} 
+													?>								
 
 												<br>
 												<h3>Comentarios</h3>
@@ -157,13 +155,13 @@
 																			echo form_close();
 																			}
 																	}  ?>   
-																	<br>
+																	
 																	<hr size="2px" width="50%" align="center" color="black"/>
 												<?php
 												} ?>                                                                 
 											 
  
-												</div>
+												
 
 												<?php
 															 
@@ -203,7 +201,7 @@
 												} ?>
 
 
-												 </div>
+												 
 											</div>
 								</div>
 						</div>

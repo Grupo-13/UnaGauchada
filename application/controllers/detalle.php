@@ -9,8 +9,6 @@ class Detalle extends CI_Controller
 	{
 		$this->load->model('usuario'); 
 		$fila = $this->gauchada->getPostById($id);		
-
-	
 		$ciudad =  $this->gauchada->getCiudadGauchada($id);
 
 
@@ -69,7 +67,7 @@ class Detalle extends CI_Controller
 
 			$this->load->model('usuario'); 
 			$fila = $this->gauchada->getPostById($id);		
-			$ciudad =  $this->usuario->getCiudad($fila->id_usuario);
+			$ciudad =  $this->gauchada->getCiudadGauchada($id);
 
 
 			$this->load->view("/guest/head");
@@ -80,7 +78,7 @@ class Detalle extends CI_Controller
 	 		$this->load->model('mcomentario');
 
 	       
-
+	 		$result3 = $this->gauchada->getPostulados($id);
 	        $result = $this->mcategorias->getCategoriasGauchadas($id);
 	        $result2= $this->mcomentario->getComentarios($id);
 
@@ -89,7 +87,8 @@ class Detalle extends CI_Controller
 				'fecha_maxima' =>$fila->fecha_maxima, 'foto' => $fila->foto, 
 				'id_usuario' => $fila->id_usuario,
 				'id_gauchada' =>$fila->id_gauchada, 'consulta' => $result->result_array(),
-				'ciudad' => $ciudad->nombre_localidad, 'comentarios'=>$result2->result_array());
+				'ciudad' => $ciudad->nombre_localidad, 'id_localidad' => $ciudad->id_localidad,
+				'cant_postulados' => $result2->num_rows(),'comentarios'=>$result2->result_array());
 			}
 				
 			$this->load->view("/guest/post", $data);
@@ -102,7 +101,7 @@ class Detalle extends CI_Controller
 
 	        $this->load->model('usuario'); 
 			$fila = $this->gauchada->getPostById($id);		
-			$ciudad =  $this->usuario->getCiudad($fila->id_usuario);
+			$ciudad =  $this->gauchada->getCiudadGauchada($id);
 
 
 			$this->load->view("/guest/head");
@@ -113,7 +112,7 @@ class Detalle extends CI_Controller
 	 		$this->load->model('mcomentario');
 
 	       
-
+	 		$result3 = $this->gauchada->getPostulados($id);
 	        $result = $this->mcategorias->getCategoriasGauchadas($id);
 	        $result2= $this->mcomentario->getComentarios($id);
 
@@ -122,7 +121,8 @@ class Detalle extends CI_Controller
 				'fecha_maxima' =>$fila->fecha_maxima, 'foto' => $fila->foto, 
 				'id_usuario' => $fila->id_usuario,
 				'id_gauchada' =>$fila->id_gauchada, 'consulta' => $result->result_array(),
-				'ciudad' => $ciudad->nombre_localidad, 'comentarios'=>$result2->result_array());
+				'ciudad' => $ciudad->nombre_localidad, 'id_localidad' => $ciudad->id_localidad,
+				'cant_postulados' => $result3->num_rows(),'comentarios'=>$result2->result_array());
 			}
 				
 			$this->load->view("/guest/post", $data);
@@ -144,9 +144,11 @@ class Detalle extends CI_Controller
 			$datos['respuesta'] = $this->input->post('respuesta');
 			$datos['id_comentario'] = $id;
 
-			$id_g = ("SELECT id_gauchada
+			$query =  $this->db->query("SELECT id_gauchada
 					  FROM comentario
 					  WHERE id_comentario = '" . $id . "'");
+			$id_g = $query->row();
+			$id_g = $id_g->id_gauchada;
 
 			$this->load->model('mcomentario');
 			$this->mcomentario->responder($datos);
@@ -154,7 +156,7 @@ class Detalle extends CI_Controller
 
 			$this->load->model('usuario'); 
 			$fila = $this->gauchada->getPostById($id_g);		
-			$ciudad =  $this->usuario->getCiudad($fila->id_usuario);
+			$ciudad =  $this->gauchada->getCiudadGauchada($id_g);
 
 
 			$this->load->view("/guest/head");
@@ -166,13 +168,15 @@ class Detalle extends CI_Controller
 
 		    $result = $this->mcategorias->getCategoriasGauchadas($id_g);
 		    $result2= $this->mcomentario->getComentarios($id_g);
+		    $result3 = $this->gauchada->getPostulados($id_g);
 
 		    if($ciudad != false){
 				$data = array('titulo' => $fila->titulo, 'descripcion' => $fila->descripcion, 
 				'fecha_maxima' =>$fila->fecha_maxima, 'foto' => $fila->foto, 
 				'id_usuario' => $fila->id_usuario,
 				'id_gauchada' =>$fila->id_gauchada, 'consulta' => $result->result_array(),
-				'ciudad' => $ciudad->nombre_localidad, 'comentarios'=>$result2->result_array());
+				'ciudad' => $ciudad->nombre_localidad, 'id_localidad' => $ciudad->id_localidad,
+				'cant_postulados' => $result3->num_rows(), 'comentarios'=>$result2->result_array());
 			}
 			else{
 				$data = array();
@@ -211,6 +215,17 @@ class Detalle extends CI_Controller
 			
 		}
 
+		else{
+
+	        $this->load->view("/guest/head");
+			$this->load->view("/guest/nav");
+
+			$data = array('id_gauchada' => $id);
+
+			$this->load->view("/vpostularse" , $data);
+
+			$this->load->view("/guest/footer");
+        }
 
 	}
 
