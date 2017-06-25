@@ -86,25 +86,27 @@
 				 ?>
 
 			<div class="panel panel-default">
- 			<div class="panel-body"> 
-			<?php	$i = 0;
+			<div class="panel-body"> 
+			<?php	
+				$i = 0;
+				$oneDimensionalArray = iterator_to_array(new RecursiveIteratorIterator(new RecursiveArrayIterator($categ)), 0);
 				foreach ($categorias as $fila) 
 				{	
-					foreach ($categ as $row) 
-					{
-            		//<input type="checkbox" name="vehicle" value="Bike">I have a bike<br>
-	       				if ($fila['id_categoria'] == $row['id_categoria']){
-	       					echo '<input type="checkbox" name="categoria[]" value="' . $fila['id_categoria'] . '" checked> ' . $fila['nombre_categoria'] .' 	';
-						}
-						else {
-							echo '<input type="checkbox" name="categoria[]" value="' . $fila['id_categoria'] . '"> ' . $fila['nombre_categoria'] .' 	';
-						}
-					}	
+					//<input type="checkbox" name="vehicle" value="Bike">I have a bike<br>
+					if (in_array($fila['id_categoria'], $oneDimensionalArray)){
+						echo '<input type="checkbox" name="categoria[]" value="' . $fila['id_categoria'] . '" checked> ' . $fila['nombre_categoria'] .' 	';
+					}
+					else {
+						echo '<input type="checkbox" name="categoria[]" value="' . $fila['id_categoria'] . '"> ' . $fila['nombre_categoria'] .' 	';
+					}
+					
+
 					$i = $i +1;
 					
 					if($i==5){
-					echo'<br>';
-					$i=0;}
+						echo'<br>';
+						$i=0;
+					}
 				}?>
 				 </div>
 			</div>

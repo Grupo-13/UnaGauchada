@@ -24,7 +24,7 @@ class Detalle extends CI_Controller
 
         if($ciudad != false){
 			$data = array('titulo' => $fila->titulo, 'descripcion' => $fila->descripcion, 
-			'fecha_maxima' =>$fila->fecha_maxima, 'foto' => $fila->foto, 
+			'fecha_maxima' =>$fila->fecha_maxima, 'foto_gauchada' => $fila->foto_gauchada, 
 			'id_usuario' => $fila->id_usuario,
 			'id_gauchada' =>$fila->id_gauchada, 'consulta' => $result->result_array(),
 			'ciudad' => $ciudad->nombre_localidad, 'id_localidad' => $ciudad->id_localidad,
@@ -84,7 +84,7 @@ class Detalle extends CI_Controller
 
 	        if($ciudad != false){
 				$data = array('titulo' => $fila->titulo, 'descripcion' => $fila->descripcion, 
-				'fecha_maxima' =>$fila->fecha_maxima, 'foto' => $fila->foto, 
+				'fecha_maxima' =>$fila->fecha_maxima, 'foto_gauchada' => $fila->foto_gauchada, 
 				'id_usuario' => $fila->id_usuario,
 				'id_gauchada' =>$fila->id_gauchada, 'consulta' => $result->result_array(),
 				'ciudad' => $ciudad->nombre_localidad, 'id_localidad' => $ciudad->id_localidad,
@@ -118,7 +118,7 @@ class Detalle extends CI_Controller
 
 	        if($ciudad != false){
 				$data = array('titulo' => $fila->titulo, 'descripcion' => $fila->descripcion, 
-				'fecha_maxima' =>$fila->fecha_maxima, 'foto' => $fila->foto, 
+				'fecha_maxima' =>$fila->fecha_maxima, 'foto_gauchada' => $fila->foto_gauchada, 
 				'id_usuario' => $fila->id_usuario,
 				'id_gauchada' =>$fila->id_gauchada, 'consulta' => $result->result_array(),
 				'ciudad' => $ciudad->nombre_localidad, 'id_localidad' => $ciudad->id_localidad,
@@ -172,7 +172,7 @@ class Detalle extends CI_Controller
 
 		    if($ciudad != false){
 				$data = array('titulo' => $fila->titulo, 'descripcion' => $fila->descripcion, 
-				'fecha_maxima' =>$fila->fecha_maxima, 'foto' => $fila->foto, 
+				'fecha_maxima' =>$fila->fecha_maxima, 'foto_gauchada' => $fila->foto_gauchada, 
 				'id_usuario' => $fila->id_usuario,
 				'id_gauchada' =>$fila->id_gauchada, 'consulta' => $result->result_array(),
 				'ciudad' => $ciudad->nombre_localidad, 'id_localidad' => $ciudad->id_localidad,

@@ -18,7 +18,7 @@ class mpublicar extends CI_Model
 		  		'fecha_maxima' => $datos['datefechamax'],
 		  		'id_usuario' => $this->session->userdata('id'), //Id del usuario que esta logueado.
 				'titulo' => $datos['titulo'],
-				'foto' => $datos['file_name'],
+				'foto_gauchada' => $datos['file_name'],
 				'id_localidad' => $datos['id_localidad'],
 				'descripcion' => $datos['descripcion']
 
@@ -103,16 +103,20 @@ class mpublicar extends CI_Model
 
 	public function modificar($datos)
 	{
+
 		$campos = array(
 
 		  		'fecha_maxima' => $datos['datefechamax'],
 				'titulo' => $datos['titulo'],
-				'foto' => $datos['file_name'],
 				'descripcion' => $datos['descripcion'],
-				'id_localidad' => $datos['id_localidad'],
-				
-
+				'id_localidad' => $datos['id_localidad']		
 			);
+
+		if($datos['file_name'] != NULL) 
+		{
+			$campos['foto_gauchada'] = $datos['file_name'];
+		}
+
 		$id_gauchada = $datos['id_gauchada'];
 
 		$this->db->where('id_gauchada', $id_gauchada);

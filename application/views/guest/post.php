@@ -7,8 +7,8 @@
 												<div class="panel-body">    
 													<h2><?=$titulo ?></h2>
 											<p align = "justify"><?= $descripcion ?></p>
-											<?php if($foto != Null){?>
-															<img src="<?=base_url()?>public/img/<?= $foto ?>"width=600 hspace=60> <br> <?php } ?>
+											<?php if($foto_gauchada != Null){?>
+															<img src="<?=base_url()?>public/img/<?= $foto_gauchada ?>"width=600 hspace=60> <br> <?php } ?>
 														</div>
 												 <div class="panel-footer">
 												 <p><?php echo'Fecha límite: '; $fecha = new DateTime($fecha_maxima); echo $fecha->format('d/m/Y');?></p>
@@ -54,9 +54,9 @@
 																 <table>
 																 <form action ="<?php echo base_url();?>publicar/modificarGauchada/<?= $id_gauchada?>">                        
 																		 <br>
-																		 <td colspan="2"><input type = "submit" value = "Modificar" /td>
+																		 <td colspan="2"><input type = "submit" value = "Modificar" /td> &emsp;
 																 </form>
-																 <form action ="<?php echo base_url();?>publicar/eliminargauchada">
+																 <form action ="<?php echo base_url();?>publicar/despublicar/<?= $id_gauchada?>">
 																		 <td colspan="2"><input type = "submit" value = "Despublicar" /td>
 																 </form>
 																 </table>

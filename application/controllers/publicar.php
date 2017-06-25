@@ -11,26 +11,6 @@ class Publicar extends CI_controller
 		$this->load->model('mpublicar');
 	}
 
-	// public function index()
-	// {
-
- 
-	// 	$this->load->view('guest/head');
- //        $this->load->view('guest/nav');
-
- //        // $this->load->model('mcategorias');
-
- //        // $result = $this->mcategorias->getCategorias();
-
- //        // $data = array(
- //        //     'consulta' => $result->result_array(),
- //        // );
- //        $this->load->view("vgauchada");
- //        $this->load->view('guest/footer');
-
-
-	// }
-
 	
 	public function nueva_gauchada()
 	{
@@ -44,7 +24,6 @@ class Publicar extends CI_controller
     	{
         	//Si la validación es correcta, cogemos los datos de la variable POST
         	//y los enviamos al modelo
-
 
 
         	$datos['titulo'] = $this->input->post('titulo');
@@ -143,12 +122,10 @@ class Publicar extends CI_controller
             'localidades' => $localidades->result_array(),
             'descripcion' => $fila->descripcion,
             'fecha_maxima' =>$fila->fecha_maxima,
-            'foto' => $fila->foto,
             'categ' => $categ->result_array(),
             'ciudad' => $ciudad->nombre_localidad,
             'id_localidad' => $ciudad->id_localidad,
             'id_usuario' => $fila->id_usuario,
-
 
         );
 
@@ -176,7 +153,7 @@ class Publicar extends CI_controller
             $datos['descripcion'] = $this->input->post('descripcion');
             $datos['datefechamax'] = $this->input->post('datefechamax');
             $datos['categoria'] = $this->input->post('categoria');
-            $datos['id_localidad'] = 30;
+            $datos['id_localidad'] = $this->input->post('localidades');
             $datos['id_gauchada'] = $this->input->post('id_gau');
 
             if ('file_name' != null) {
@@ -217,12 +194,9 @@ class Publicar extends CI_controller
                 'localidades' => $localidades->result_array(),
                 'descripcion' => $fila->descripcion,
                 'fecha_maxima' =>$fila->fecha_maxima,
-                'foto' => $fila->foto,
                 'categ' => $categ->result_array(),
                 'ciudad' => $ciudad,
                 'id_usuario' => $fila->id_usuario,
-
-
             );
 
             $this->load->view("vmodificarGauchada", $data);

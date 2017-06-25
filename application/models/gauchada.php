@@ -9,8 +9,8 @@ class Gauchada extends CI_Model
 	public function getGauchadas()
 	{
 		
-		return $this->db->query("SELECT u.id_usuario, u.nombre, u.apellido, g.id_gauchada, g.titulo, 
-										g.id_gauchada, g.fecha_publicacion, g.descripcion, g.foto, g.fecha_maxima, 
+		return $this->db->query("SELECT u.id_usuario, u.nombre, u.apellido, g.titulo, 
+										g.id_gauchada, g.fecha_publicacion, g.descripcion, g.foto_gauchada, g.fecha_maxima, 
 										l.nombre_localidad, l.id_localidad
 								FROM usuario as u
 								INNER JOIN gauchada as g on g.id_usuario = u.id_usuario
@@ -81,11 +81,12 @@ class Gauchada extends CI_Model
 	}
 	public function estoyPostulado($id = '')
 	{
+		$user = $this->session->userdata('id');
 		$result = $this->db->query("SELECT g.id_usuario
 		 							FROM gauchada AS g
 									INNER JOIN postulados AS p
-									WHERE p.id_usuario = '" . $this->session->userdata('id') . "' " .
-									"AND  p.id_gauchada = '". $id . "'");
+									WHERE $user = p.id_usuario
+									AND  $id = p.id_gauchada");
 		return $result->row();
 	}
 
