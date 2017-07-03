@@ -1,7 +1,7 @@
 <?php
 
 /**
-* 
+*
 */
 class Gauchada extends CI_Model
 {
@@ -20,18 +20,20 @@ class Gauchada extends CI_Model
 
 	public function getPostById($id = '')
 	{
-		$result = $this->db->query("SELECT * FROM gauchada WHERE id_gauchada = '" . $id . "' LIMIT 1");
+		$result = $this->db->query("SELECT * FROM gauchada WHERE id_gauchada = $id LIMIT 1");
 		return $result->row();
 	}
 
 	public function getPostulados($id = '')
-	{
-		$result = $this->db->query("SELECT DISTINCT p.id_postulacion, p.elegido, p.descripcion, p.fecha_postulacion
-		 							FROM gauchada AS g
-									INNER JOIN postulados AS p
-									WHERE p.id_gauchada = '" . $id . "'");
-		return $result;
-	}
+    {
+        $result = $this->db->query("SELECT DISTINCT p.id_postulacion, p.elegido, p.descripcion, p.fecha_postulacion, p.id_usuario, p.id_gauchada
+                                     FROM gauchada AS g
+                                    INNER JOIN postulados AS p
+                                    INNER JOIN usuario AS u on u.id_usuario = p.id_usuario
+                                    WHERE $id = p.id_gauchada
+                                    ORDER BY u.reputacion DESC ");
+        return $result;
+    }
 
 
 	public function enviarPostulacion($datos)
@@ -89,5 +91,47 @@ class Gauchada extends CI_Model
 									AND  $id = p.id_gauchada");
 		return $result->row();
 	}
+
+	public function getMisGauchadas($id = '')
+    {
+        return $this->db->query("SELECT titulo, fecha_publicacion, id_gauchada, candidato, fecha_maxima
+                                    FROM gauchada 
+                                    WHERE id_usuario = $id
+                                    ORDER BY fecha_publicacion");
+    }
+
+    public function despostularse($id_gauchada = '', $id_usuario = '')
+    {
+        return $this->db->query("DELETE
+                                    FROM postulados 
+                                    WHERE id_usuario = $id_usuario
+                                    AND id_gauchada = $id_gauchada");
+    }
+
+	public function adeudoCalificaciones($id = '')
+    {    
+       $today = new DateTime();
+
+
+       $sql = "SELECT id_gauchada FROM calificacion";
+     
+
+       $this->db->select('*');
+       $this->db->from('gauchada');
+       $this->db->where('gauchada.id_usuario', $id);
+       $this->db->where('gauchada.fecha_maxima <', $today->format('Y-m-d'));
+       $this->db->where_not_in('gauchada.id_gauchada', $sql);
+
+       $result = $this->db->get();
+
+       return $result->result_array();
+    }
+
+	public function getCandidato($id = '')
+   {
+       return $this->db->query("SELECT id_gauchada, candidato, fecha_maxima
+                                   FROM gauchada
+                                   WHERE id_gauchada = $id");
+   }
 
 }

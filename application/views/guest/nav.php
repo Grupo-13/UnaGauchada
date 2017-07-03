@@ -54,12 +54,33 @@
                     <li>
                         <a href="<?= base_url()?>login/logout">Cerrar sesión</a>
                     </li> -->
+                    <!-- <?= base_url(); ?>notificaciones
+                          background: rgba(0, 0, 0, 0.5); -->
+                    <li class='dropdown'>
+                        <a id ='cont' class='dropdown-toggle' href="#" data-toggle='dropdown'>Notificaciones: <?php $notis = $this->usuario->getNotisNoVistas($this->session->userdata('id')); echo $notis->num_rows();?></a>
+
+                          <div class='dropdown-menu' style='padding: 4px; padding-bottom: 10px; background: rgba(0, 0, 0, 0.5); width: 400px; height: 400px;'>
+                            <div class='form-group' style="width: 100%; height: 100%;">
+                              <script src="plantilla/js/jquery.js"></script>
+                              <script>
+                                $(function(){
+                                  $('#cont').mousedown(function(){
+                                    $('#cont').text("Notificaciones: 0");
+                                  });
+                                });
+                                
+                              </script>
+
+                              <iframe src="<?= base_url() ?>notificaciones" style="width: 100%; height: 100%;"  name="notificaciones"></iframe>
+                            </div>
+                          </div>   
+                    </li>
                     <li>
                         <a>Creditos: <?php $creditos = $this->usuario->getCreditos($this->session->userdata('id')); echo $creditos->creditos;?></a>
                     </li>
 
                     <li class='dropdown'>
-                      <a class='dropdown-toggle' href='#' data-toggle='dropdown' style="background: none;"><?= $this->session->userdata('nombre')?><strong class='caret'></strong></a>
+                      <a class='dropdown-toggle' href='#' data-toggle='dropdown' style="background: none;"><?php $aux = $this->usuario->getUsuarioById($this->session->userdata('id')); echo $aux->nombre . ' ' . $aux->apellido?><strong class='caret'></strong></a>
                       <div class='dropdown-menu' style='padding: 10px; padding-bottom: 0px; background: rgba(0, 0, 0, 0.5); width: 400px;'>
                         <form action='<?= base_url() ?>login' method='post' accept-charset='UTF-8' role="form">
                           <div class='form-group'>

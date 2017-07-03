@@ -28,7 +28,9 @@ class Detalle extends CI_Controller
 			'id_usuario' => $fila->id_usuario,
 			'id_gauchada' =>$fila->id_gauchada, 'consulta' => $result->result_array(),
 			'ciudad' => $ciudad->nombre_localidad, 'id_localidad' => $ciudad->id_localidad,
-			'cant_postulados' => $result2->num_rows(), 'comentarios'=>$result3->result_array());
+			'cant_postulados' => $result2->num_rows(), 
+			'comentarios'=>$result3->result_array()
+			);
 		}
 		else{
 			$data = array();
@@ -54,19 +56,29 @@ class Detalle extends CI_Controller
         	//Si la validación es correcta, cogemos los datos de la variable POST
         	//y los enviamos al modelo
 
-
+    		$fila = $this->gauchada->getPostById($id);
         	$datos['pregunta'] = $this->input->post('pregunta');
+        	
+        	//datos para notis
+        	$datos['autor'] = $this->session->userdata('id');
         	$datos['id_gauchada'] = $id;
+        	$datos['destino'] = $fila->id_usuario;
+        	$datos['tipo'] = 0;
+        	$datos['titulo'] = $fila->titulo;
+
       
 
         	$this->load->model('mcomentario');
-        	$this->mcomentario->comentar($datos);   
+        	$this->mcomentario->comentar($datos); 
+
+        	$this->load->model('mnotificacion');
+        	$this->mnotificacion->nuevaNoti($datos); 
  	
 		
 		
 
 			$this->load->model('usuario'); 
-			$fila = $this->gauchada->getPostById($id);		
+					
 			$ciudad =  $this->gauchada->getCiudadGauchada($id);
 
 
@@ -76,6 +88,7 @@ class Detalle extends CI_Controller
 
 	 		$this->load->model('mcategorias');
 	 		$this->load->model('mcomentario');
+
 
 	       
 	 		$result3 = $this->gauchada->getPostulados($id);
@@ -88,7 +101,7 @@ class Detalle extends CI_Controller
 				'id_usuario' => $fila->id_usuario,
 				'id_gauchada' =>$fila->id_gauchada, 'consulta' => $result->result_array(),
 				'ciudad' => $ciudad->nombre_localidad, 'id_localidad' => $ciudad->id_localidad,
-				'cant_postulados' => $result2->num_rows(),'comentarios'=>$result2->result_array());
+				'cant_postulados' => $result3->num_rows(),'comentarios'=>$result2->result_array());
 			}
 				
 			$this->load->view("/guest/post", $data);
@@ -144,19 +157,28 @@ class Detalle extends CI_Controller
 			$datos['respuesta'] = $this->input->post('respuesta');
 			$datos['id_comentario'] = $id;
 
-			$query =  $this->db->query("SELECT id_gauchada
+			$query =  $this->db->query("SELECT *
 					  FROM comentario
 					  WHERE id_comentario = '" . $id . "'");
 			$id_g = $query->row();
-			$id_g = $id_g->id_gauchada;
+			$fila = $this->gauchada->getPostById($id_g->id_gauchada);	
 
 			$this->load->model('mcomentario');
 			$this->mcomentario->responder($datos);
 
+			$datos['autor'] = $this->session->userdata('id');
+        	$datos['id_gauchada'] = $id_g->id_gauchada;
+        	$datos['destino'] = $id_g->id_usuario;
+        	$datos['tipo'] = 1;
+        	$datos['titulo'] = $fila->titulo;
+
+			$this->load->model('mnotificacion');
+        	$this->mnotificacion->nuevaNoti($datos);
+
 
 			$this->load->model('usuario'); 
-			$fila = $this->gauchada->getPostById($id_g);		
-			$ciudad =  $this->gauchada->getCiudadGauchada($id_g);
+			$fila = $this->gauchada->getPostById($id_g->id_gauchada);		
+			$ciudad =  $this->gauchada->getCiudadGauchada($id_g->id_gauchada);
 
 
 			$this->load->view("/guest/head");
@@ -166,9 +188,9 @@ class Detalle extends CI_Controller
 			$this->load->model('mcategorias');
 			$this->load->model('mcomentario');
 
-		    $result = $this->mcategorias->getCategoriasGauchadas($id_g);
-		    $result2= $this->mcomentario->getComentarios($id_g);
-		    $result3 = $this->gauchada->getPostulados($id_g);
+		    $result = $this->mcategorias->getCategoriasGauchadas($id_g->id_gauchada);
+		    $result2= $this->mcomentario->getComentarios($id_g->id_gauchada);
+		    $result3 = $this->gauchada->getPostulados($id_g->id_gauchada);
 
 		    if($ciudad != false){
 				$data = array('titulo' => $fila->titulo, 'descripcion' => $fila->descripcion, 
@@ -211,6 +233,16 @@ class Detalle extends CI_Controller
 			$datos['descripcion'] = $this->input->post('descripcion');	
 			$datos['id_gauchada'] = $id;
 
+			$fila = $this->gauchada->getPostById($id);
+
+			$datos['autor'] = $this->session->userdata('id');
+        	$datos['destino'] = $fila->id_usuario;
+        	$datos['tipo'] = 2;
+        	$datos['titulo'] = $fila->titulo;
+
+			$this->load->model('mnotificacion');
+        	$this->mnotificacion->nuevaNoti($datos);
+
 			$this->gauchada->enviarPostulacion($datos);
 			
 		}
@@ -228,6 +260,21 @@ class Detalle extends CI_Controller
         }
 
 	}
+
+	public function postulados($id = '')
+    {         
+        $this->load->view("/guest/head");
+        $this->load->view("/guest/nav");
+
+        $result = $this->gauchada->getPostulados($id);
+        
+        $data = array('postulados' => $result->result_array());
+
+        $this->load->view("elegir_candidato" , $data);
+
+        $this->load->view("/guest/footer");
+
+    }
 
 
 }

@@ -15,8 +15,19 @@
 		Datos de la compra:
 	</h4>
 	<br>
+
+	<script>
+		function validate(form) {
+				var lala = confirm('Monto de la compra: $' + form.elements['creditos'].value * 50 + '. Confirma?');
+		        return lala;
+		}
+	</script>
+
+	<form method="post" accept-charset="utf-8" action="<?= base_url() ?>comprarcredito/comprar" onsubmit="return validate(this);" />
+	<!-- <form method="post" accept-charset="utf-8" action="<?= base_url() ?>comprarcredito/comprar" onsubmit="return confirm('Está seguro?');" /> -->
 	<?php
-		echo form_open('comprarcredito/comprar');
+
+		//echo form_open('comprarcredito/comprar');
 
 		// echo form_error('nrotarjeta');
 		// echo form_label('Nro. Tarjeta', 'nrotarjeta');
@@ -73,7 +84,7 @@
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">Fecha de vencimiento</span>
                             ';
-                echo '<input type="date" name="fecVencimiento"  value = ' . set_value('fecVencimiento') . '>';
+                echo '<input type="date" style="width: 100%;" name="fecVencimiento"  value = ' . set_value('fecVencimiento') . '>';
                     echo '
                     </div>';
                     echo '

@@ -1,81 +1,84 @@
     <!-- Main Content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <?php
+            <div class="col-md-3">
+               
+               
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span><b>  FILTROS</b>
+               <?php
 
-                    
-                echo form_open('home/buscar');
-                echo '<div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Título</span>
-                            ';
-                    $data = array(
-                        'name' => 'titulo',
-                        'class'        => 'form-control',
-                        'placeholder'          => 'Título',
-                        'aria-describedby'       => 'basic-addon1',
-                        'value' => set_value('titulo')
-                        );
-                    echo form_input($data);
-                    echo '
-                    </div>';
-                    echo '
-                    <br>';
-                echo '
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Seleccione las categorías</span>
-                            ';
-                echo '
-                    </div>'; 
-                    
-                ?>
+                   
+               echo form_open('home/buscar');
+               echo '<div class="input-group">
+                       <span class="input-group-addon" id="basic-addon1">Título</span>
+                           ';
+                   $data = array(
+                       'name' => 'titulo',
+                       'class'        => 'form-control',
+                       'placeholder'          => 'Título',
+                       'aria-describedby'       => 'basic-addon1',
+                       'value' => set_value('titulo')
+                       );
+                   echo form_input($data);
+                   echo '
+                   </div>';
+                   echo '
+                   <br>';                    
 
-                <div class="panel panel-default">
-                <div class="panel-body"> 
-                <?php   $i = 0;
-                    foreach ($categorias as $fila) 
-                    {
-                        //<input type="checkbox" name="vehicle" value="Bike">I have a bike<br>
-                    
-                        echo '<input type="checkbox" name="categoria[]" value="' . $fila['id_categoria'] . '"> ' . $fila['nombre_categoria'] .'     ';
-                        $i = $i +1;
-                        if($i==5){
-                        echo'<br>';
-                        $i=0;}
-                    }?>
-                     </div>
+
+               echo '
+               <div class="input-group">
+                   <span class="input-group-addon" id="basic-addon1">Localidad</span>
+                       ';
+
+               echo '<select name="locali" style="max-width:45%;">';
+               echo '<option selected disabled>Seleccione una localidad</option>';
+               foreach ($localidades as $tupla) {
+                   echo '<option value="'. $tupla['id_localidad'] . '">' . $tupla['nombre_localidad'] . '</option>';
+               }  
+               
+               echo '</select>';
+               echo '
+               </div>';
+               echo '
+               <br>';
+               
+
+               echo '
+                   <div class="input-group">
+                       <span class="input-group-addon" id="basic-addon1">Seleccione las categorías</span>
+                           ';
+               echo '
+                   </div>'; ?>
+
+               <div class="panel panel-default">
+               <div class="panel-body">
+               <?php  
+                   foreach ($categorias as $fila)
+                   {
+                       //<input type="checkbox" name="vehicle" value="Bike">I have a bike<br>
+                   
+                       echo '<input type="checkbox" name="categoria[]" value="' . $fila['id_categoria'] . '"> ' . $fila['nombre_categoria'] .'     ';
+                       echo'<br>';
+                   }?>
+                    </div>
+               </div>
+     
+           
+               <?php
+               echo form_submit('botonSubmit', 'Buscar');
+               echo form_close(); ?>
+
                 </div>
-       
-                <?php
-
-                echo '
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">Localidad</span>
-                        ';
-
-                echo '<select name="locali" >';
-                echo '<option selected disabled>Seleccione una localidad</option>';
-                foreach ($localidades as $tupla) {
-                    echo '<option value="'. $tupla['id_localidad'] . '">' . $tupla['nombre_localidad'] . '</option>';
-                }   
-                
-                echo '</select>';
-                echo '
-                </div>';
-                echo '
-                <br>';
-
-                echo form_submit('botonSubmit', 'Buscar');
-                echo form_close();
-
-
+           <div class="col-md-8">
+            <?php
                     foreach ($consulta as $fila) {
                
                       ?>
-                     <div class="post-preview">
+                     <div class="post-preview"  style= "border: 3px solid black; padding-left: 10px; border-radius: 20px;">
                         <a href="<?= base_url()?>detalle/post/<?= $fila['id_gauchada']?>">
-                            <h2 class="post-title">
-                                <?= $fila['titulo']; ?>
+                            <h2 class="post-title" align="justify">
+                                <center><?= $fila['titulo']; ?></center>
                             </h2>
                             <h3 class="post-subtitle">
                                 <?= substr($fila['descripcion'], 0, 100). "...";
@@ -103,10 +106,14 @@
 
 
                         </a>
+                        <?php 
+                            date_default_timezone_set('America/Argentina/Buenos_Aires');
+                            $today = new DateTime(); 
+                            $fecha2 = new DateTime( $fila['fecha_maxima']);
 
-                            <?php if($this->session->userdata('login'))
+                             if($this->session->userdata('login'))
                                     {
-                                         if($this->session->userdata('id') == $fila['id_usuario'])
+                                         if(($this->session->userdata('id') == $fila['id_usuario']) & ($fecha2->format('Y-m-d') > $today->format('Y-m-d')) )
                                          {
                                             $id = $fila['id_gauchada'] ?>
                                             <table>
@@ -127,8 +134,7 @@
                         <p class="post-meta">Publicado por <a href="<?= base_url()?>perfil/usuario/<?= $fila['id_usuario']?>"><?= $fila['nombre']." " . $fila['apellido']?></a>
                             <?php $fecha = new DateTime($fila['fecha_publicacion']); echo ' el ' .$fecha->format('d/m/Y'); ?></p>
                     </div>
-                    <hr>
-
+                    <br>
                 <?php 
                     }
                 ?>

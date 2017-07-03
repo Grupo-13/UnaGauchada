@@ -10,7 +10,9 @@
 	</h2>
 	<?php 
 	$creditos = $this->usuario->getCreditos($this->session->userdata('id'));
-	if ($creditos->creditos > 0){
+	$adeudo = $this->gauchada->adeudoCalificaciones($this->session->userdata('id'));
+	//if (($creditos->creditos > 0) and (!$adeudo)){
+	if (($creditos->creditos > 0) ){
 
 
 		//echo validation_errors();
@@ -130,7 +132,7 @@
         echo form_close();
     }
 
-    else 
+    elseif ($creditos->creditos == 0)
     {
  
     	echo '<br>';
@@ -146,46 +148,16 @@
 		</table>
 		</form>
 			
-  	 <?php }?>
+  	 <?php }
+  	 else
+  	 {
+  	 	echo '<br>';
+   
+    	echo "Para publicar una gauchada no puede adeudar calificaciones." ;
+  	 }?>
 
 		</div>
 	</div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
 
 
-<!-- <DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	<h1>Publicar gauchada</h1>
-	<form action ="<?php //echo base_url();?>publicar/botonpublicar" method = "POST" enctype="multipart/form-data">	
-		<table>
-			<tr>
-				<td> <label>Titulo </label></td>
-				<td> <input type = "text" name = "txttitulo" maxlength="50"> </td>
-			</tr>
-			<tr>
-				<td> <label>Descripcion </label></td>
-				<td> <input type = "text" name = "txtdescripcion"> </td>
-			</tr>
-			<tr>
-				<td> <label>Fecha máxima </label></td>
-				<td> <input type = "DATE" name = "datefechamax"> </td>
-			</tr>
-			<tr>
-				<td> <label>Foto </label></td>
-				<td> <input type = "longblob" name = "filefoto" class="form-control">
-						<td colspan="2"><input type = "submit" value = "Subir Imagen" onclik = "<?php //echo base_url();?>publicar/subirImagen"/td> </td>
-			</tr>
-			<tr> <td colspan="2"><input type = "submit" value = "Publicar"/td>
-			</tr>
-
-		</table>	
-	<!-</form>
-	<form action ="<?php //echo base_url();?>publicar/subirImagen" method = "POST" enctype="multipart/form-data">
-	</form>	
-	<a href="<?php //echo base_url();?>cimagenes/downloads/<?php //echo $archivo;?>">Descargar</a> -->
-<!-- </body>
-</html> -->

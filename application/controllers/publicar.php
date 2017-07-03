@@ -226,8 +226,8 @@ class Publicar extends CI_controller
 
 
         $id_usuario = $fila->id_usuario;
-    
         $result = $this->gauchada->getPostulados($id);
+        
 
         if($result->num_rows() == 0)
         {
@@ -242,6 +242,7 @@ class Publicar extends CI_controller
             $this->mpublicar->eliminarGauchadaConPostulados($id);
         }
 
+        
     }
 
 }

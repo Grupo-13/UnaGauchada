@@ -14,17 +14,13 @@ class mpublicar extends CI_Model
 	{
 
 		$campos = array(
-
-		  		'fecha_maxima' => $datos['datefechamax'],
-		  		'id_usuario' => $this->session->userdata('id'), //Id del usuario que esta logueado.
-				'titulo' => $datos['titulo'],
-				'foto_gauchada' => $datos['file_name'],
-				'id_localidad' => $datos['id_localidad'],
-				'descripcion' => $datos['descripcion']
-
-				
-			);
-			// $id_usuario = $data->id_usuario;
+	  		'fecha_maxima' => $datos['datefechamax'],
+	  		'id_usuario' => $this->session->userdata('id'),
+			'titulo' => $datos['titulo'],
+			'foto_gauchada' => $datos['file_name'],
+			'id_localidad' => $datos['id_localidad'],
+			'descripcion' => $datos['descripcion']
+		);
 
 		 	$result2 = $this->db->query("SELECT creditos 
 		 								FROM usuario 
@@ -44,14 +40,13 @@ class mpublicar extends CI_Model
 		 	// 						// AND g.fecha_maxima > current(date)
 		 			//				 );	
 
-		 	 if (($campos['id_usuario'] > 0) and ($data2->creditos > 0)) //and ($result3 === null))
-		 	 {
+		 	if (($campos['id_usuario'] > 0) and ($data2->creditos > 0)) //and ($result3 === null))
+		 	{
 		 	 
 		  		$insert = $this->db->insert('gauchada', $campos);
 		  		$insert_id = $this->db->insert_id();
 		  		if ($insert)
 		  		{
-		  			//Update creditos de usuario. -1.
 		  			$this->db->query("UPDATE Usuario
 		  						  SET creditos = creditos - 1
 		  						  WHERE id_usuario = '". $campos['id_usuario'] ."'");
@@ -88,13 +83,6 @@ class mpublicar extends CI_Model
 
 		  			echo "Sus créditos son insuficientes."; 
 		  		}
-
-		  		// if ($result3 != null)
-		  		//{
-		   	//		echo 'Tiene calificaciones pendientes.';
-		  	//	}
-		 	 
-
 		  		
 		  	}
 		
@@ -174,6 +162,23 @@ class mpublicar extends CI_Model
 
     public function eliminarGauchadaConPostulados($id = '')
     {
+    	$result = $this->gauchada->getPostulados($id);
+    	$fila = $this->gauchada->getPostById($id);
+
+    	$postulados = $result->result_array();
+
+        $datos['id_gauchada'] = $id;
+        $datos['autor'] = $this->session->userdata('id');
+        $datos['titulo'] = $fila->titulo;
+        $datos['tipo'] = 3;
+        $this->load->model('mnotificacion');
+        foreach ($postulados as $key) {
+
+            $datos['destino'] = $key['id_usuario'];
+
+            $this->mnotificacion->nuevaNoti($datos);
+        }
+
     	$this->load->view("/guest/head");
         $this->load->view("/guest/nav");
         $this->db->query("DELETE FROM gauchada
@@ -184,7 +189,5 @@ class mpublicar extends CI_Model
           
         $this->load->view("/vEliminacionConPostulados");
         $this->load->view("/guest/footer");
-      
-
     }
 }
