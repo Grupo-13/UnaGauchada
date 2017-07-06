@@ -26,14 +26,15 @@
 						<br>
 						<?php 
 						$data = array('id_gauchada' => $p['id_gauchada'], 
-									  'id_usuario'=>$p['id_usuario']);
+									  'id_usuario'=> $p['id_usuario']);
 						
 						?>
 
-						<form action ="<?php echo base_url();?>calificarusuario/elegido/<?=$p['id_usuario']?>/<?=$p['id_gauchada']?>" onsubmit="return confirm('Esta seguro?');"> 
+
+						<form action ="<?php echo base_url();?>calificarusuario/elegido/<?php $data?>" onsubmit="return confirm('Esta seguro?');"> 
 						<?php $fecha = new DateTime($p['fecha_postulacion']); echo $fecha->format('d/m/Y'); ?>
 						&emsp;
-						<?php $candidato = $this->gauchada->getCandidato($p['id_gauchada']);
+						<?php $candidato = $this->gauchada->getCandidato($data['id_gauchada']);
 						$can = $candidato->row();
 						
 						if ($can->candidato == 0) {	?>

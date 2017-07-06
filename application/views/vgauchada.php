@@ -11,8 +11,8 @@
 	<?php 
 	$creditos = $this->usuario->getCreditos($this->session->userdata('id'));
 	$adeudo = $this->gauchada->adeudoCalificaciones($this->session->userdata('id'));
-	//if (($creditos->creditos > 0) and (!$adeudo)){
-	if (($creditos->creditos > 0) ){
+	if (($creditos->creditos > 0) and (!$adeudo)){
+	//if (($creditos->creditos > 0) ){
 
 
 		//echo validation_errors();

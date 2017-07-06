@@ -9,12 +9,31 @@ class Gauchada extends CI_Model
 	public function getGauchadas()
 	{
 		
+		date_default_timezone_set('America/Argentina/Buenos_Aires');
+		$today = new DateTime(); 
+
+		$this->db->select('usuario.id_usuario, usuario.nombre, usuario.apellido, gauchada.titulo, 
+						gauchada.id_gauchada, gauchada.fecha_publicacion, gauchada.descripcion, gauchada.foto_gauchada, 
+						gauchada.fecha_maxima, localidad.nombre_localidad, localidad.id_localidad');
+		$this->db->from('usuario');
+		$this->db->join('gauchada', 'usuario.id_usuario = gauchada.id_usuario');
+		$this->db->join('localidad', 'localidad.id_localidad = gauchada.id_localidad');
+		$this->db->where('gauchada.fecha_maxima >=', $today->format('Y-m-d'));
+		$this->db->group_by("gauchada.id_gauchada");
+		$this->db->order_by('fecha_publicacion', 'DESC');
+
+		return $this->db->get();
+
+	}
+
+	public function getTodasLasGauchadas()
+	{
 		return $this->db->query("SELECT u.id_usuario, u.nombre, u.apellido, g.titulo, 
 										g.id_gauchada, g.fecha_publicacion, g.descripcion, g.foto_gauchada, g.fecha_maxima, 
 										l.nombre_localidad, l.id_localidad
 								FROM usuario as u
 								INNER JOIN gauchada as g on g.id_usuario = u.id_usuario
-								INNER JOIN localidad as l on g.id_localidad = l.id_localidad
+								INNER JOIN localidad as l on g.id_localidad = l.id_localidad 
 								ORDER BY g.fecha_publicacion DESC ");
 	}
 
@@ -26,13 +45,23 @@ class Gauchada extends CI_Model
 
 	public function getPostulados($id = '')
     {
-        $result = $this->db->query("SELECT DISTINCT p.id_postulacion, p.elegido, p.descripcion, p.fecha_postulacion, p.id_usuario, p.id_gauchada
-                                     FROM gauchada AS g
-                                    INNER JOIN postulados AS p
-                                    INNER JOIN usuario AS u on u.id_usuario = p.id_usuario
-                                    WHERE $id = p.id_gauchada
-                                    ORDER BY u.reputacion DESC ");
-        return $result;
+    	$this->db->DISTINCT('postulados.id_postulacion, postulados.elegido, postulados.descripcion, postulados.fecha_postulacion, postulados.id_usuario, postulados.id_gauchada');
+		$this->db->from('gauchada');
+		$this->db->join('postulados', 'postulados.id_gauchada = gauchada.id_gauchada');
+		$this->db->join('usuario', 'usuario.id_usuario = postulados.id_usuario');
+		$this->db->where('gauchada.id_gauchada', $id);
+		//$this->db->group_by("gauchada.id_gauchada");
+		$this->db->order_by('usuario.reputacion', 'DESC');
+
+		return $this->db->get();
+
+        // $result = $this->db->query("SELECT DISTINCT p.id_postulacion, p.elegido, p.descripcion, p.fecha_postulacion, p.id_usuario, p.id_gauchada
+        //                              FROM gauchada AS g
+        //                             INNER JOIN postulados AS p
+        //                             INNER JOIN usuario AS u on u.id_usuario = p.id_usuario
+        //                             WHERE $id = p.id_gauchada
+        //                             ORDER BY u.reputacion DESC ");
+        // return $result;
     }
 
 
@@ -110,17 +139,20 @@ class Gauchada extends CI_Model
 
 	public function adeudoCalificaciones($id = '')
     {    
+       date_default_timezone_set('America/Argentina/Buenos_Aires'); 
        $today = new DateTime();
 
 
-       $sql = "SELECT id_gauchada FROM calificacion";
+       //$sql = "SELECT id_gauchada FROM calificacion";
+       $sql2 = "gauchada.id_gauchada NOT IN (SELECT calificacion.id_gauchada FROM calificacion)";
      
 
-       $this->db->select('*');
+       $this->db->select('gauchada.id_gauchada');
        $this->db->from('gauchada');
        $this->db->where('gauchada.id_usuario', $id);
        $this->db->where('gauchada.fecha_maxima <', $today->format('Y-m-d'));
-       $this->db->where_not_in('gauchada.id_gauchada', $sql);
+       $this->db->where($sql2);
+       //$this->db->where_not_in('gauchada.id_gauchada', $sql);
 
        $result = $this->db->get();
 

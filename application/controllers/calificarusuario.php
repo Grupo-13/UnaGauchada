@@ -65,39 +65,40 @@ class Calificarusuario extends CI_Controller
     }
 
 
-	public function elegido($id_u = '', $id_g = '')
-    {  	/* Cuando se presiona el botón elegir se pone la postulacion del usuario elegido en 1(fue elegido) y las demás 
+	 public function elegido($data){  	/* Cuando se presiona el botón elegir se pone la postulacion del usuario elegido en 1(fue elegido) y las demás 
     	postulaciones con el mismo id_gauchada en 2 (es decir, no fue elegido)
     	Se guarda en la gauchada el id_usuario que fue elegido en el campo candidato  y se habilita la vista para calificarlo */
-        $dato = $this->usuario->getCalificacion($id_g);                          
+
+        $this->load->model('usuario');
+        $dato = $this->usuario->getCalificacion($data['id_gauchada']);                          
         if ($dato->num_rows() > 0) {
             $this->load->view("/guest/head");
             $this->load->view("/guest/nav");
             $this->load->view("/calificacion_hecha");
             $this->load->view("/guest/footer"); 
         } else {
-            
+
           
            	 	$campos1 = array('elegido' => '2');            
-            	$this->db->where('id_gauchada', $id_g);
+            	$this->db->where('id_gauchada', $data['id_gauchada']);
               $this->db->update('postulados', $campos1);
 
               $campos2 = array('elegido' => '1');   
-            	$this->db->where('id_usuario', $id_u);
-            	$this->db->where('id_gauchada', $id_g);
+            	$this->db->where('id_usuario', $data['id_usuario']);
+            	$this->db->where('id_gauchada', $data['id_gauchada']);
               $this->db->update('postulados', $campos2);
 
               //notificaciones
               $this->load->model('mnotificacion');
-              $fila = $this->gauchada->getPostById($id_g);
+              $fila = $this->gauchada->getPostById($data['id_gauchada']);
               $datos['autor'] = $this->session->userdata('id');
-              $datos['id_gauchada'] = $id_g;
+              $datos['id_gauchada'] = $data['id_gauchada'];
               
               $datos['titulo'] = $fila->titulo;
               $datos['tipo'] = 5;
-              $result = $this->gauchada->getPostulados($id_g);
+              $result = $this->gauchada->getPostulados($data['id_gauchada']);
               foreach ($result->result_array() as $key) {
-                if ($key['id_usuario'] != $id_u) {
+                if ($key['id_usuario'] != $data['id_usuario']) {
                   $datos['destino'] = $key['id_usuario'];
                   $this->mnotificacion->nuevaNoti($datos);
                 }
@@ -106,19 +107,19 @@ class Calificarusuario extends CI_Controller
               
 
               $datos['tipo'] = 4;
-              $datos['destino'] = $id_u;
+              $datos['destino'] = $data['id_usuario'];
               
               $this->mnotificacion->nuevaNoti($datos);
 
-              $campos3 = array('candidato' =>  $id_u);            
-            	$this->db->where('id_gauchada', $id_g);
+              $campos3 = array('candidato' =>  $data['id_usuario']);            
+            	$this->db->where('id_gauchada', $data['id_gauchada']);
               $this->db->update('gauchada', $campos3);
 
 
-              $data = $this->usuario->getUsuarioById($id_u);
+              $data2 = $this->usuario->getUsuarioById($data['id_usuario']);
 
               $datos = array(
-      				'usuario' => $data,
+      				'usuario' => $data2,
       				'gauchada' => $fila,
                      );
 

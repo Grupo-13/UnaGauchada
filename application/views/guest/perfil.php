@@ -37,16 +37,20 @@
 								$this->load->model('usuario');
 								$query = $this->usuario->getLogro($reputacion);
 								$l = $query->row(); ?>
-							
- 								Reputación:	<?= $l->nombre_logro?>	
-								<br>
-								<br>	
+								
 								<?php
-									if ($id == $this->session->userdata('id')) { ?>
-										Créditos: <?=$creditos ?>
-										<br>
-										<br>
-								<?php }	?>							
+								if ($id == $this->session->userdata('id')) { ?>
+ 									Reputación:	<?= $l->nombre_logro?> = <?php echo $reputacion; ?>
+									<br>
+									<br>	
+								
+									Créditos: <?=$creditos ?>
+									<br>
+									<br>
+								<?php }	
+								else{?>
+									Reputación:	<?= $l->nombre_logro?>
+								<?php }?>							
 								</b>	
 								<center>
 								<?php

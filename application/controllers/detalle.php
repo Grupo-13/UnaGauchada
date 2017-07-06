@@ -207,6 +207,41 @@ class Detalle extends CI_Controller
 
 			$this->load->view("/guest/footer");	
 		}
+		 else{
+		 	$query =  $this->db->query("SELECT *
+					  FROM comentario
+					  WHERE id_comentario = '" . $id . "'");
+			$id_g = $query->row();
+			$fila = $this->gauchada->getPostById($id_g->id_gauchada);	
+		
+			$ciudad =  $this->gauchada->getCiudadGauchada($id_g->id_gauchada);
+
+
+			$this->load->view("/guest/head");
+			$this->load->view("/guest/nav");
+		
+
+	 		$this->load->model('mcategorias');
+	 		$this->load->model('mcomentario');
+
+	       
+	 		$result3 = $this->gauchada->getPostulados($id_g->id_gauchada);
+	        $result = $this->mcategorias->getCategoriasGauchadas($id_g->id_gauchada);
+	        $result2= $this->mcomentario->getComentarios($id_g->id_gauchada);
+
+	        if($ciudad != false){
+				$data = array('titulo' => $fila->titulo, 'descripcion' => $fila->descripcion, 
+				'fecha_maxima' =>$fila->fecha_maxima, 'foto_gauchada' => $fila->foto_gauchada, 
+				'id_usuario' => $fila->id_usuario,
+				'id_gauchada' =>$fila->id_gauchada, 'consulta' => $result->result_array(),
+				'ciudad' => $ciudad->nombre_localidad, 'id_localidad' => $ciudad->id_localidad,
+				'cant_postulados' => $result3->num_rows(),'comentarios'=>$result2->result_array());
+			}
+				
+			$this->load->view("/guest/post", $data);
+
+			$this->load->view("/guest/footer");	
+        }
 	}
 
 	public function postularse($id = '')
