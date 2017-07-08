@@ -83,6 +83,11 @@
                       <a class='dropdown-toggle' href='#' data-toggle='dropdown' style="background: none;"><?php $aux = $this->usuario->getUsuarioById($this->session->userdata('id')); echo $aux->nombre . ' ' . $aux->apellido?><strong class='caret'></strong></a>
                       <div class='dropdown-menu' style='padding: 10px; padding-bottom: 0px; background: rgba(0, 0, 0, 0.5); width: 400px;'>
                         <form action='<?= base_url() ?>login' method='post' accept-charset='UTF-8' role="form">
+                          <?php if ($this->session->userdata('admin')) { ?>
+                          <div class='form-group'>
+                            <a href="<?= base_url()?>admin">Administrar</a>
+                          </div>  
+                          <?php } ?>
                           <div class='form-group'>
                             <a href="<?= base_url()?>perfil/usuario/<?= $this->session->userdata('id');?>">Mi perfil</a>
                           </div>

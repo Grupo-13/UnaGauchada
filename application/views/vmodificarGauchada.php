@@ -15,6 +15,7 @@
 		echo form_open_multipart('publicar/modificar/'.$id_gauchada);
 		echo '<br>';
 		echo form_hidden('id_gau', $id_gauchada);
+		echo form_hidden('cant_postulados', $cant_postulados);
 		echo form_error('titulo');
 
         echo '<div class="input-group">

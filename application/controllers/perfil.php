@@ -6,27 +6,27 @@
 class Perfil extends CI_Controller
 {
 	public function usuario($id = '')
-    {
-        $fila = $this->usuario->getUsuarioById($id);
+	{
+		$fila = $this->usuario->getUsuarioById($id);
 
-        $ciudad = $this->usuario->getCiudadUsuario($id);
-        $postulaciones = $this->usuario->getGauchadasPostulado($id);
-        $gauchadas = $this->gauchada->getMisGauchadas($id);
+		$ciudad = $this->usuario->getCiudadUsuario($id);
+		$postulaciones = $this->usuario->getGauchadasPostulado($id);
+		$gauchadas = $this->gauchada->getMisGauchadas($id);
 
 
-        $data = array('email' => $fila->email, 'nombre' => $fila->nombre, 
-            'ciudad' => $ciudad->nombre_localidad, 'creditos' => $fila->creditos,
-            'reputacion' => $fila->reputacion, 'fecha_nacimiento' => $fila->fecha_nacimiento,
-            'apellido' =>$fila->apellido, 'foto' => $fila->foto, 'id_usuario' => $fila->id_usuario,
-            'consulta' => $postulaciones->result_array(), 'gauchadas' =>$gauchadas->result_array());
+		$data = array('email' => $fila->email, 'nombre' => $fila->nombre, 
+			'ciudad' => $ciudad->nombre_localidad, 'creditos' => $fila->creditos,
+			'reputacion' => $fila->reputacion, 'fecha_nacimiento' => $fila->fecha_nacimiento,
+			'apellido' =>$fila->apellido, 'foto' => $fila->foto, 'id_usuario' => $fila->id_usuario,
+			'consulta' => $postulaciones->result_array(), 'gauchadas' =>$gauchadas->result_array());
 
-        $this->load->view("/guest/head");
-        $this->load->view("/guest/nav");
-        $this->load->view("/guest/perfil", $data);
+		$this->load->view("/guest/head");
+		$this->load->view("/guest/nav");
+		$this->load->view("/guest/perfil", $data);
 
-        $this->load->view("/guest/footer");
+		$this->load->view("/guest/footer");
 
-    }
+	}
 
 	public function editarPerfil($id = '')
 	{
@@ -62,8 +62,8 @@ class Perfil extends CI_Controller
 	public function editar($id = '')
 	{
 
-		$this->form_validation->set_rules('nombre', 'Nombre', 'required|alpha|max_length[50]');
-		$this->form_validation->set_rules('apellido', 'Apellido', 'required|alpha|max_length[50]');
+		$this->form_validation->set_rules('nombre', 'Nombre', 'required|max_length[50]|callback_alpha_dash_space');
+		$this->form_validation->set_rules('apellido', 'Apellido', 'required|max_length[50]|callback_alpha_dash_space');
 		$this->form_validation->set_rules('dni', 'DNI', 'required|integer|max_length[8]');
 		$this->form_validation->set_rules('fecnac', 'fecha de nacimiento', 'required|callback_edad');
 		$this->form_validation->set_rules('telefono', 'telefono', 'required|integer');
@@ -106,13 +106,13 @@ class Perfil extends CI_Controller
 
 
 			$data = array(
-				'dni' => $fila->dni,
-				'nombre' => $fila->nombre,
-				'apellido' => $fila->apellido,
-				'fecnac' => $fila->fecha_nacimiento,
+				'dni' => $this->input->post('dni'),
+				'nombre' => $this->input->post('nombre'),
+				'apellido' => $this->input->post('apellido'),
+				'fecnac' => $this->input->post('fecnac'),
 				'foto' => $fila->foto,
-				'id_localidad' => $fila->id_localidad,
-				'telefono' =>$fila->telefono,
+				'id_localidad' => $this->input->post('localidades'),
+				'telefono' => $this->input->post('telefono'),
 				'id_usuario' =>$id,
 				'localidades' =>$localidades->result_array(),
 
@@ -136,9 +136,19 @@ class Perfil extends CI_Controller
 			return false;
 
 		}else{
-				return true;
+				
 		}
 		
+	}
+
+	function alpha_dash_space($str)
+	{
+		if (! preg_match("/^([a-z ])+$/i", $str)) {
+			$this->form_validation->set_message("alpha_dash_space", "El campo %s contiene caracteres inválidos.");
+			return false;
+		}else{
+			return true;
+		}
 	}
 
 	public function despostularse($id_gauchada = '')
@@ -147,13 +157,13 @@ class Perfil extends CI_Controller
 		$fila = $this->gauchada->getPostById($id_gauchada);
 
 		$datos['autor'] = $this->session->userdata('id');
-    	$datos['id_gauchada'] = $id_gauchada;
-    	$datos['destino'] = $fila->id_usuario;
-    	$datos['tipo'] = 6;
-    	$datos['titulo'] = $fila->titulo;
+		$datos['id_gauchada'] = $id_gauchada;
+		$datos['destino'] = $fila->id_usuario;
+		$datos['tipo'] = 6;
+		$datos['titulo'] = $fila->titulo;
 
-    	$this->load->model('mnotificacion');
-        $this->mnotificacion->nuevaNoti($datos); 
+		$this->load->model('mnotificacion');
+		$this->mnotificacion->nuevaNoti($datos); 
 
 		$this->gauchada->despostularse($id_gauchada, $datos['autor']);
 

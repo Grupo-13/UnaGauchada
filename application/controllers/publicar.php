@@ -187,16 +187,17 @@ class Publicar extends CI_controller
 
 
             $data = array(
-                'cant_postulados' => $result2->num_rows(),
+                'cant_postulados' => $this->input->post('cant_postulados'),
                 'id_gauchada' => $id,
-                'titulo' => $fila->titulo,
+                'titulo' => $this->input->post('titulo'),
                 'categorias' => $categorias->result_array(),
                 'localidades' => $localidades->result_array(),
-                'descripcion' => $fila->descripcion,
-                'fecha_maxima' =>$fila->fecha_maxima,
-                'categ' => $categ->result_array(),
+                'descripcion' => $this->input->post('descripcion'),
+                'fecha_maxima' =>$this->input->post('datefechamax'),
+                'categ' => $this->input->post('categoria'),
                 'ciudad' => $ciudad,
                 'id_usuario' => $fila->id_usuario,
+                'id_localidad' => $ciudad->id_localidad,
             );
 
             $this->load->view("vmodificarGauchada", $data);

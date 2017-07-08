@@ -19,7 +19,7 @@ class Iniciarsesion extends CI_Model
 					'email' => $email,
 					'id' => $fila->id_usuario,
 					'login' => true,
-					'nombre' => $fila->nombre . " " . $fila->apellido
+					'admin' => $fila->admin
 					
 				);
 
