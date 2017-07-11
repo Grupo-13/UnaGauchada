@@ -11,7 +11,7 @@
 
 	<title>Una Gauchada</title>
 
-	<!-- Bootstrap Core CSS
+	<!-- Bootstrap Core CSS 
 	<link href="<?= base_url()?>plantilla/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
 
 	<?php echo load_bootstrap(); ?>

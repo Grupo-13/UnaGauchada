@@ -1,13 +1,9 @@
 		<div class="col-md-8">
-			
-			<hr>
-			<hr>
-			<div>
-				<b>ADMIN</b>
-			</div>
-			
 
-
+				<br>
+				<br>
+				<br>
+				<b>Panel de administración</b>
 
 		</div>
 	</div>
